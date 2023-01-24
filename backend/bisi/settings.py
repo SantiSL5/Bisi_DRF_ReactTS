@@ -152,11 +152,11 @@ CORS_ORIGIN_WHITELIST = (
 # AUTH_USER_MODEL = 'authentication.User'
 
 # REST_FRAMEWORK = {
-#     'EXCEPTION_HANDLER': 'onthewheels.apps.core.exceptions.core_exception_handler',
+#     'EXCEPTION_HANDLER': 'bisi.apps.core.exceptions.core_exception_handler',
 #     'NON_FIELD_ERRORS_KEY': 'error',
 
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'onthewheels.apps.authentication.backends.JWTAuthentication',
+#         'bisi.apps.authentication.backends.JWTAuthentication',
 #     ),
 #     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 #     # 'PAGE_SIZE': 20,

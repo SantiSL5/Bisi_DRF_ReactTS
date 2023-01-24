@@ -21,6 +21,21 @@ class bikeSerializer(serializers.ModelSerializer):
         }
 
 
+    def createBike(self, request):
+        
+        number = self.context['number']
+        warning = self.context['warning']
+        disabled = self.context['disabled']
+
+        bike = Bike.objects.create(
+            number = number,
+            warning = warning,
+            disabled = disabled,
+        )
+
+        return bike
+
+
     def getAllBikes(context):
 
         bikes = Bike.objects.all()
