@@ -16,8 +16,6 @@ import os
 
 env=Env()
 
-env.read_env()
-
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,7 +36,9 @@ SECRET_KEY = 'DJANGO_SECRET'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost",
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0'
 ]
 
 # Application definition
@@ -53,6 +53,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
+
+    'bisi.apps.bikes',
 ]
 
 MIDDLEWARE = [
