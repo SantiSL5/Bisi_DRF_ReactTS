@@ -10,8 +10,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class BikeView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = bikeSerializer
-    http_method_names = ['get', 'post', 'put']
-    http_method_names.append("post")
+    http_method_names = ['get', 'post', 'put', 'delete']
 
     
     def getAllBikes(self,request):
@@ -49,3 +48,8 @@ class BikeView(viewsets.GenericViewSet):
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
         return Response(serializer.data)
+
+    def deleteBike(self, request, number):
+        bike = get_object_or_404(Bike.objects.all(), number=number)
+        bike.delete()
+        return Response({'data': 'Bike deleted'})

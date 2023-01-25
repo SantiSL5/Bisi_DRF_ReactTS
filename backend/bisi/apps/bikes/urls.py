@@ -3,5 +3,5 @@ from .view import BikeView
 
 urlpatterns = [
     path('', BikeView.as_view({'get':'getAllBikes', 'post': 'createBike',})),
-    path('<int:number>', BikeView.as_view({'put': 'updateBike'})),
+    path('<int:number>', BikeView.as_view({'put': 'updateBike', 'delete': 'deleteBike'})),
 ]
