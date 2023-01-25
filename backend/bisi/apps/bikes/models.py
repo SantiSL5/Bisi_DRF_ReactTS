@@ -4,7 +4,7 @@ from bisi.apps.core.models import TimestampedModel
 
 class Bike(TimestampedModel):
     # serial_number = models.CharField(max_length=255)
-    number = models.IntegerField(unique=True)
+    number = models.IntegerField(db_index=True, unique=True)
     # battery = models.IntegerField(
     #     default=100,
     #     validators=[

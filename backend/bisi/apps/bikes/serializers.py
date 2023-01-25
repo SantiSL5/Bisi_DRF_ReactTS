@@ -3,7 +3,7 @@ from pyexpat import model
 from rest_framework import serializers
 from .models import Bike
 
-class bikeSerializer(serializers.ModelSerializer):
+class BikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bike
@@ -25,7 +25,7 @@ class bikeSerializer(serializers.ModelSerializer):
         bikes = Bike.objects.all()
         serialized_bikes= []
         for bike in bikes.iterator():
-            serialized_bike=bikeSerializer.to_bike(bike)
+            serialized_bike=BikeSerializer.to_bike(bike)
             serialized_bikes.append(serialized_bike)
 
         return serialized_bikes

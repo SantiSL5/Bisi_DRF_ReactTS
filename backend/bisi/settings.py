@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'bisi.apps.bikes',
+    'bisi.apps.stations',
 ]
 
 MIDDLEWARE = [

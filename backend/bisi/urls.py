@@ -19,5 +19,6 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/bike/', include('bisi.apps.bikes.urls'))
+    path('api/bike/', include('bisi.apps.bikes.urls')),
+    path('api/station/', include('bisi.apps.stations.urls'))
 ]
