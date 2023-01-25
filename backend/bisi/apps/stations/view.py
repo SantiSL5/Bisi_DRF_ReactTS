@@ -10,9 +10,30 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class StationView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = StationSerializer
-    http_method_names = ['get']
+    http_method_names = ['get', 'post']
 
     
     def getAllStations(self,request):
         serializer = StationSerializer.getAllStations(context)
         return Response(serializer,status=status.HTTP_200_OK)
+    
+    def createStation(self, request):
+
+        serializer_context = {
+            'name': request.data['name'],
+            'warning': request.data['warning'],
+            'disabled': request.data['disabled'],
+            'request': request
+        }
+
+        serializer_data = request.data
+
+        serializer = self.serializer_class(
+            data = serializer_data,
+            context = serializer_context
+        )
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
