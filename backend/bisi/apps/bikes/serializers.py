@@ -20,22 +20,6 @@ class bikeSerializer(serializers.ModelSerializer):
             'disabled' : instance.disabled
         }
 
-
-    def createBike(self, request):
-        
-        number = self.context['number']
-        warning = self.context['warning']
-        disabled = self.context['disabled']
-
-        bike = Bike.objects.create(
-            number = number,
-            warning = warning,
-            disabled = disabled,
-        )
-
-        return bike
-
-
     def getAllBikes(context):
 
         bikes = Bike.objects.all()
@@ -45,3 +29,52 @@ class bikeSerializer(serializers.ModelSerializer):
             serialized_bikes.append(serialized_bike)
 
         return serialized_bikes
+
+    def updateBike(context):
+        
+        oldnumber = context['oldnumber']
+        number = context['number']
+        warning = context['warning']
+        disabled = context['disabled']
+        
+        
+        try:
+            bike = Bike.objects.get(number=oldnumber)
+            
+            checkid = Bike.objects.get(number=number)
+            
+            if bike.id != checkid.id:
+                return "Bike already exists"
+                
+            
+        except:
+            if bike:
+                return("Bike doesn't exist")
+                
+            
+            return("Bike doesn't exist")
+
+        
+        
+
+        # if not bike.number:
+        #     print ("adads")
+        #     raise serializers.ValidationError(
+        #         'Bike already exists.'
+        #     )
+            
+
+
+        Bike.objects.filter(number=number).update(
+            number = number,
+            warning = warning,
+            disabled = disabled,
+        )
+        
+        bike = Bike.objects.get(number=number)
+        
+        return{
+            'number': bike.number,
+            'warning': bike.warning,
+            'disabled': bike.disabled,
+        }
