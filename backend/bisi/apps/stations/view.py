@@ -10,7 +10,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class StationView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = StationSerializer
-    http_method_names = ['get', 'post', 'put']
+    http_method_names = ['get', 'post', 'put', 'delete']
 
     
     def getAllStations(self,request):
@@ -46,3 +46,8 @@ class StationView(viewsets.GenericViewSet):
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
         return Response(serializer.data)
+    def deleteStation(self, request, slug):
+        station = get_object_or_404(Station.objects.all(), slug=slug)
+        station.delete()
+        return Response({'data': 'Station deleted'})
+
