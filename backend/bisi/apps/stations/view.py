@@ -10,7 +10,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class StationView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = StationSerializer
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'put']
 
     
     def getAllStations(self,request):
@@ -37,3 +37,12 @@ class StationView(viewsets.GenericViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    def updateStation(self, request, slug):
+        station = get_object_or_404(Station.objects.all(), slug=slug)
+        data = request.data
+                
+        serializer = StationSerializer(
+            instance=station, data=data, partial=True)
+        if (serializer.is_valid(raise_exception=True)):
+            serializer.save()
+        return Response(serializer.data)
