@@ -10,10 +10,6 @@ class Station(TimestampedModel):
     warning = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name, allow_unicode=True)
-        super().save(*args, **kwargs)
-
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Stations"
