@@ -10,7 +10,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class SlotView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = SlotSerializer
-    http_method_names = ['get', 'post', 'put']
+    http_method_names = ['get', 'post', 'put', 'delete']
 
     
     def getAllSlots(self,request):
@@ -48,3 +48,9 @@ class SlotView(viewsets.GenericViewSet):
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
         return Response(serializer.data)
+    
+    def deleteSlot(self, request, id):
+        slot = get_object_or_404(Slot.objects.all(),id=id)
+        slot.delete()
+        return Response({'data': 'Slot deleted'})
+

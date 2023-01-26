@@ -3,5 +3,5 @@ from .view import SlotView
 
 urlpatterns = [
     path('', SlotView.as_view({'get':'getAllSlots', 'post': 'createSlot'})),
-    path('<int:id>', SlotView.as_view({'put': 'updateSlot'})),
+    path('<int:id>', SlotView.as_view({'put': 'updateSlot', 'delete': 'deleteSlot'})),
 ]
