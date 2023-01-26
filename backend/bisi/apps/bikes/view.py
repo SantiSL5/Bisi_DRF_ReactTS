@@ -39,8 +39,8 @@ class BikeView(viewsets.GenericViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-    def updateBike(self, request, number):
-        bike = get_object_or_404(Bike.objects.all(), number=number)
+    def updateBike(self, request, id):
+        bike = get_object_or_404(Bike.objects.all(), id=id)
         data = request.data
                 
         serializer = BikeSerializer(
@@ -49,7 +49,7 @@ class BikeView(viewsets.GenericViewSet):
             serializer.save()
         return Response(serializer.data)
 
-    def deleteBike(self, request, number):
-        bike = get_object_or_404(Bike.objects.all(), number=number)
+    def deleteBike(self, request, id):
+        bike = get_object_or_404(Bike.objects.all(),id=id)
         bike.delete()
         return Response({'data': 'Bike deleted'})

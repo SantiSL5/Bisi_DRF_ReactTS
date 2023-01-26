@@ -37,8 +37,8 @@ class StationView(viewsets.GenericViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-    def updateStation(self, request, slug):
-        station = get_object_or_404(Station.objects.all(), slug=slug)
+    def updateStation(self, request, id):
+        station = get_object_or_404(Station.objects.all(), id=id)
         data = request.data
                 
         serializer = StationSerializer(
@@ -46,8 +46,8 @@ class StationView(viewsets.GenericViewSet):
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
         return Response(serializer.data)
-    def deleteStation(self, request, slug):
-        station = get_object_or_404(Station.objects.all(), slug=slug)
+    def deleteStation(self, request, id):
+        station = get_object_or_404(Station.objects.all(), id=id)
         station.delete()
         return Response({'data': 'Station deleted'})
 
