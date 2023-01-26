@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomButton from "../../components/button.component";
-import consume from "../../Consumer";
+import consume from "../../../core/consumers";
 
 const Home = () => {
     const [number, setNumber] = useState(0);
