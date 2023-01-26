@@ -2,22 +2,25 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from .models import Slot
+from ..stations .serializers import StationSerializer
 
 class SlotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Slot
         fields = (
+            'id',
             'number',
-            'station'
+            'station',
             'warning', 
             'disabled'
         )
 
     def to_slot(instance):
         return {
+            'id': instance.id,
             'number' : instance.number,
-            'station' : instance.station,
+            'station' : StationSerializer.to_station(instance.station),
             'warning' : instance.warning,
             'disabled' : instance.disabled
         }

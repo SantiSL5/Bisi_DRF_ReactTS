@@ -8,6 +8,7 @@ class StationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Station
         fields = (
+            'id',
             'slug', 
             'name', 
             'warning',
@@ -16,6 +17,7 @@ class StationSerializer(serializers.ModelSerializer):
 
     def to_station(instance):
         return {
+            'id': instance.id,
             'slug' : instance.slug, 
             'name' : instance.name, 
             'warning' : instance.warning,

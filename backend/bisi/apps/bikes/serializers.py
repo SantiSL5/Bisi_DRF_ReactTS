@@ -8,6 +8,7 @@ class BikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bike
         fields = (
+            'id',
             'number', 
             'warning', 
             'disabled'
@@ -15,6 +16,7 @@ class BikeSerializer(serializers.ModelSerializer):
 
     def to_bike(instance):
         return {
+            'id': instance.id,
             'number' : instance.number,
             'warning' : instance.warning,
             'disabled' : instance.disabled
