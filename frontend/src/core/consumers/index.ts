@@ -1,38 +1,8 @@
-//Api
+import userConsumer from "./userConsumer";
 
-const ApiUser: any = {
-    get: () => {
-        console.log('get');
-        console.log(Consumers);
-
-    },
-    post: () => {
-        console.log('post');
-
-    }
+const consumers: any = {
+    ApiUser: { ...userConsumer }
 }
 
-// Queries
+export default consumers;
 
-const ConsumersQuery: any = {
-    userConsumer: "ApiUser",
-    bikeConsumer: "ApiBike"
-}
-
-const Queries: any = {
-    userGet: "get",
-    userPost: "post"
-}
-
-// Consumer
-
-const Consumers: any = {
-    ApiUser: { ...ApiUser }
-}
-
-const consume = (Consumer: string, Query: string) => {
-    return Consumers[ConsumersQuery[Consumer]][Queries[Query]]()
-
-}
-
-export default consume;

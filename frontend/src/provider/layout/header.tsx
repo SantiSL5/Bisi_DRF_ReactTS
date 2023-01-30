@@ -10,7 +10,7 @@ const Header = (props: HeaderProps) => {
         <Link to="/">Home</Link>
         {/* <Link to="/about">About</Link> */}
         <Link to={`/about/${id}`}>About</Link>
-
+        <Link to="/gancho">Gancho</Link>
 
         {props.title}
     </div>

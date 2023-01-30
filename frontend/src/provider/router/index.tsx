@@ -1,5 +1,6 @@
 import Home from "../pages/Home/";
 import About from "../pages/About/";
+import Gancho from "../pages/Gancho/";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "../layout";
 import Test from "../pages/About/test.page";
@@ -13,6 +14,7 @@ const Router = () => {
                     <Route path="/about/" element={<About />}>
                         <Route path=":id" element={<Test />}></Route>
                     </Route>
+                    <Route path="/gancho/" element={<Gancho />}></Route>
                 </Routes>
             </Layout>
         </BrowserRouter>
