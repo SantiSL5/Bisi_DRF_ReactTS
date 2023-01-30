@@ -11,6 +11,7 @@ const Header = (props: HeaderProps) => {
         {/* <Link to="/about">About</Link> */}
         <Link to={`/about/${id}`}>About</Link>
         <Link to="/gancho">Gancho</Link>
+        <Link to="/admin">Admin</Link>
 
         {props.title}
     </div>
