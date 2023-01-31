@@ -1,7 +1,9 @@
 import userConsumer from "./userConsumer";
+import bikeConsumer from "./bikeConsumer";
 
 const consumers: any = {
-    ApiUser: { ...userConsumer }
+    ApiUser: { ...userConsumer },
+    ApiBike: { ...bikeConsumer },
 }
 
 export default consumers;

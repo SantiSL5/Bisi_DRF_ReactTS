@@ -38,8 +38,48 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '0.0.0.0'
+    '0.0.0.0',
+    'frontend_drfr',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=True
+
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:3000',
+    'http://0.0.0.0:3000',
+    'http://localhost:3000',
+    'http://frontend_drfr:3000',
+)
+
+CORS_ALLOWED_ORIGINS = [
+    'http://0.0.0.0:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'http://frontend_drfr:3000',
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+APPEND_SLASH = True
 
 # Application definition
 
@@ -142,10 +182,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-CORS_ORIGIN_WHITELIST = (
-    'http://0.0.0.0:3000',
-    'http://localhost:3000',
-)
 
 # # Tell Django about the custom `User` model we created. The string
 # # `authentication.User` tells Django we are referring to the `User` model in
