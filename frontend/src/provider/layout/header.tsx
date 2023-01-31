@@ -6,7 +6,6 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-    const id = "Pepe"
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
