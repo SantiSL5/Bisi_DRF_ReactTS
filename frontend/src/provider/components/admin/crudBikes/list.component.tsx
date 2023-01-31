@@ -10,7 +10,7 @@ const List = ({ list }: any) => {
     };
 
     const removeSelectedBikes = () => {
-        console.log(selectedRows);
+        console.log(selectedRows.id);
         // console.log(selectedRows);
         
         // if (selectedRows.length > 0) {

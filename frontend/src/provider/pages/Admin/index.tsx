@@ -1,10 +1,11 @@
 import { useEffect, useReducer, useState } from "react";
-import List from "../../components/list.component";
+import List from "../../components/admin/crudBikes/list.component";
+import Create from "../../components/admin/crudBikes/create.component";
 import { useBikes } from "../../hooks/useBikes";
 
 const bikesBilly = (state: any, action: any) => {
-    
-    
+
+
     switch (action.type) {
         case "set":
             return state.includes(action.list)
@@ -28,15 +29,11 @@ const Admin = () => {
         }
     }, [bikes])
 
-
-
-
-    // bikes.data[0].id
     return (
         <div>
-            {bikeList.length != 0 ? <List list={bikeList}></List> : <div>ASS</div>}
+            <Create></Create>
+            {bikeList.length != 0 ? <List list={bikeList}></List> : <div>Loading...</div>}
 
-            {/* <List list={bikeList}></List> */}
         </div>
     );
 }
