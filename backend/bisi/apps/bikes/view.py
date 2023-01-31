@@ -21,7 +21,6 @@ class BikeView(viewsets.GenericViewSet):
 
         serializer_context = {
             'number': request.data['number'],
-            'slot': request.data['slot'],
             'warning': request.data['warning'],
             'disabled': request.data['disabled'],
             'request': request
@@ -48,7 +47,7 @@ class BikeView(viewsets.GenericViewSet):
             instance=bike, data=data, partial=True)
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
-        return Response(serializer.data)
+        return Response(BikeSerializer.to_bike(bike))
 
     def deleteBike(self, request, id):
         bike = get_object_or_404(Bike.objects.all(),id=id)

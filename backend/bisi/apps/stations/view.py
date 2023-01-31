@@ -45,7 +45,7 @@ class StationView(viewsets.GenericViewSet):
             instance=station, data=data, partial=True)
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
-        return Response(serializer.data)
+        return Response(StationSerializer.to_station(station))
     def deleteStation(self, request, id):
         station = get_object_or_404(Station.objects.all(), id=id)
         station.delete()

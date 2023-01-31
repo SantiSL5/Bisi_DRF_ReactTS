@@ -3,6 +3,7 @@ from pyexpat import model
 from rest_framework import serializers
 from .models import Slot
 from ..stations .serializers import StationSerializer
+from ..bikes .serializers import BikeSerializer
 
 class SlotSerializer(serializers.ModelSerializer):
 
@@ -12,6 +13,7 @@ class SlotSerializer(serializers.ModelSerializer):
             'id',
             'number',
             'station',
+            'bike',
             'warning', 
             'disabled'
         )
@@ -21,6 +23,7 @@ class SlotSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'number' : instance.number,
             'station' : StationSerializer.to_station(instance.station),
+            'bike': instance.bike_id if instance.bike_id == None else BikeSerializer.to_bike(instance.bike),
             'warning' : instance.warning,
             'disabled' : instance.disabled
         }

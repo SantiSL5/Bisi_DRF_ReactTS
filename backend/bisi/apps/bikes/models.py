@@ -12,7 +12,7 @@ class Bike(TimestampedModel):
     #         MinValueValidator(0)
     #     ]
     # )
-    slot = models.ForeignKey('slots.Slot', on_delete=models.DO_NOTHING, related_name='slots', null=True)
+    # slot = models.ForeignKey('slots.Slot', on_delete=models.DO_NOTHING, related_name='slots', null=True)
     warning = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
 

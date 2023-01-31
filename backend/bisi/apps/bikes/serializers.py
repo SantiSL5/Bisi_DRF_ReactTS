@@ -2,7 +2,7 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from .models import Bike
-from ..slots .serializers import SlotSerializer
+# from ..slots .serializers import SlotSerializer
 
 class BikeSerializer(serializers.ModelSerializer):
 
@@ -10,8 +10,7 @@ class BikeSerializer(serializers.ModelSerializer):
         model = Bike
         fields = (
             'id',
-            'number', 
-            'slot',
+            'number',
             'warning', 
             'disabled'
         )
@@ -20,7 +19,6 @@ class BikeSerializer(serializers.ModelSerializer):
         return {
             'id': instance.id,
             'number' : instance.number,
-            'slot' : SlotSerializer.to_slot(instance.slot),
             'warning' : instance.warning,
             'disabled' : instance.disabled
         }

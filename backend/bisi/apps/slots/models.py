@@ -4,6 +4,7 @@ from bisi.apps.core.models import TimestampedModel
 class Slot(TimestampedModel):
     number = models.IntegerField(db_index=True, unique=True)
     station = models.ForeignKey('stations.Station', on_delete=models.CASCADE, related_name='stations')
+    bike = models.ForeignKey('bikes.Bike', on_delete=models.DO_NOTHING, related_name='bikes', null=True)
     warning = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
 

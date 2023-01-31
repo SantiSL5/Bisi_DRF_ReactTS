@@ -22,6 +22,7 @@ class SlotView(viewsets.GenericViewSet):
         serializer_context = {
             'number': request.data['number'],
             'station': request.data['station'],
+            'bike': None, 
             'warning': request.data['warning'],
             'disabled': request.data['disabled'],
             'request': request
@@ -47,7 +48,7 @@ class SlotView(viewsets.GenericViewSet):
             instance=slot, data=data, partial=True)
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
-        return Response(serializer.data)
+        return Response(SlotSerializer.to_slot(slot))
     
     def deleteSlot(self, request, id):
         slot = get_object_or_404(Slot.objects.all(),id=id)
