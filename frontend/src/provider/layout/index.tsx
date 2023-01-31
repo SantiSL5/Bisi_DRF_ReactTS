@@ -10,7 +10,7 @@ const Layout = (props: any) => {
             gap: "5rem",
             backgroundColor: "fuchsia"
         }}>
-            <Header title="Santander"></Header>
+            <Header title="Bisi"></Header>
             {props.children}
             <Footer title="A"></Footer>
         </div>
