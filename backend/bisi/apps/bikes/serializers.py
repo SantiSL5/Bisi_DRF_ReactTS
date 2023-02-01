@@ -2,7 +2,6 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from .models import Bike
-# from ..slots .serializers import SlotSerializer
 
 class BikeSerializer(serializers.ModelSerializer):
 
@@ -32,3 +31,13 @@ class BikeSerializer(serializers.ModelSerializer):
             serialized_bikes.append(serialized_bike)
 
         return serialized_bikes
+    
+    def getBikesDelete(context):
+
+        bikes = Bike.objects.filter(id__in=context['ids'])
+        serialized_bikes= []
+        for bike in bikes.iterator():
+            serialized_bike=BikeSerializer.to_bike(bike)
+            serialized_bikes.append(serialized_bike)
+
+        return bikes,serialized_bikes

@@ -54,4 +54,19 @@ class SlotView(viewsets.GenericViewSet):
         slot = get_object_or_404(Slot.objects.all(),id=id)
         slot.delete()
         return Response({'data': 'Slot deleted'})
+    
+    def deleteSlots(self, request):
+        serializer_context = {
+            'ids': request.data['ids'],
+            'request': request
+        }
+
+        if len(serializer_context['ids']) > 0:
+            slots,serializer = SlotSerializer.getSlotsDelete(serializer_context)
+            if len(serializer) != len(serializer_context['ids']):
+                return Response({'data': "Some slots doesn't exist"})
+            slots.delete()
+            return Response({'data': 'Slots deleted'})
+        return Response({'data': 'No slots provided'})
+
 

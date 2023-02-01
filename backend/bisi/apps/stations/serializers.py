@@ -33,3 +33,13 @@ class StationSerializer(serializers.ModelSerializer):
             serialized_stations.append(serialized_station)
 
         return serialized_stations
+    
+    def getStationsDelete(context):
+
+        stations = Station.objects.filter(id__in=context['ids'])
+        serialized_stations= []
+        for station in stations.iterator():
+            serialized_station=StationSerializer.to_station(station)
+            serialized_stations.append(serialized_station)
+
+        return stations,serialized_stations
