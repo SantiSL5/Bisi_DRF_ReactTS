@@ -37,3 +37,13 @@ class SlotSerializer(serializers.ModelSerializer):
             serialized_slots.append(serialized_slot)
 
         return serialized_slots
+    
+    def getSlotsDelete(context):
+
+        slots = Slot.objects.filter(id__in=context['ids'])
+        serialized_slots= []
+        for slot in slots.iterator():
+            serialized_slot=SlotSerializer.to_slot(slot)
+            serialized_slots.append(serialized_slot)
+
+        return slots,serialized_slots
