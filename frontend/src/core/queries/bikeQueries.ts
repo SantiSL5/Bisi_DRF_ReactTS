@@ -1,8 +1,7 @@
 
 const bikeQueries: any = {
     getAllBikes: "getAll",
-    // getRandom: "getRandom",
-    // postUser: "post",
+    createBike: "createOne",
 }
 
 export default bikeQueries;

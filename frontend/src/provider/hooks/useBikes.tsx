@@ -5,22 +5,24 @@ import { queryConsumer, bikeQueries } from "../../core/queries";
 export function useBikes() {
 
     const [bikes, setBikes]: any = useState(undefined);
+    const [load, setLoad]: any = useState(true)
 
-    const getAllBikes = useEffect(() => {
+    useEffect(() => {
+        consume(queryConsumer.apiBike, bikeQueries.getAllBikes).then((res: any )=> {
+            setBikes(res.data);
 
-        const req = async () => {
-            const res = await consume(queryConsumer.apiBike, bikeQueries.getAllBikes);
-            setBikes(res);
-        }
-
-        req();
-
-        return () => {
-            setBikes();
-        };
-
+        })
     }, [])
 
-    return { bikes, setBikes, getAllBikes };
+    const createBike = ((data: any) => {
+
+        consume(queryConsumer.apiBike, bikeQueries.createBike, data).then((res: any) => {
+            const aux = [...bikes, res.data]
+            
+            setBikes(aux)
+        })
+    })
+
+    return { bikes, createBike,setLoad };
 
 }

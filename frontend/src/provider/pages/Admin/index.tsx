@@ -3,37 +3,14 @@ import List from "../../components/admin/crudBikes/list.component";
 import Create from "../../components/admin/crudBikes/create.component";
 import { useBikes } from "../../hooks/useBikes";
 
-const bikesBilly = (state: any, action: any) => {
-
-
-    switch (action.type) {
-        case "set":
-            return state.includes(action.list)
-                ? state
-                : [...state, action.list]
-        default:
-            return state;
-    }
-};
 
 const Admin = () => {
-    const { bikes, setBikes } = useBikes();
-
-    const [trigger, pullTrigger]: any = useState(0);
-
-    const [bikeList, dispatch] = useReducer(bikesBilly, []);
-
-    useEffect(() => {
-        if (bikes) {
-            dispatch({ type: "set", list: bikes })
-        }
-    }, [bikes])
+    const { bikes, createBike } = useBikes();
 
     return (
         <div>
-            <Create></Create>
-            {bikeList.length != 0 ? <List list={bikeList}></List> : <div>Loading...</div>}
-
+            <Create createBike={createBike}></Create>
+            {bikes ? <List list={bikes}></List> : <div>Loading...</div>}
         </div>
     );
 }

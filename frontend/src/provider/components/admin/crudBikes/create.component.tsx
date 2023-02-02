@@ -8,7 +8,7 @@ interface IFormInputs {
     disabled: boolean,
 }
 
-const List = ({ list }: any) => {
+const List = ({ createBike }: any) => {
 
     const {
         register,
@@ -19,15 +19,11 @@ const List = ({ list }: any) => {
     });
 
     const onSubmit = (data: IFormInputs) => {
-
-        console.log(data);
-
+        createBike(data)
     };
-
 
     return (
         <div className="container">
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-2">
                     <label htmlFor="Number" className="form-label">Number:
@@ -64,9 +60,6 @@ const List = ({ list }: any) => {
                     <input type="checkbox" className="form-check-input" id="disabled" {...register("disabled", {})} />
                     <label className="form-check-label" htmlFor="disabled">Disabled</label>
                 </div>
-
-
-
                 <input type="submit" />
             </form>
 

@@ -52,16 +52,13 @@ const List = ({ list }: any) => {
             {
                 <DataTable
                     columns={columns}
-                    data={list[0].data}
+                    data={list}
                     pagination
                     selectableRows
                     onSelectedRowsChange={handleChange}
                     clearSelectedRows={toggledClearRows}
 
                 />
-                // list[0].data.map((e: any) => {
-                //     return <div><h1>{e.id}</h1></div>
-                // })
             }
         </div>
     );
