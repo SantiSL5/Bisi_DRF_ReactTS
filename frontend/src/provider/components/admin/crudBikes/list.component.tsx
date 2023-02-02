@@ -33,12 +33,12 @@ const List = ({ list }: any) => {
         },
         {
             name: 'Warning',
-            selector: (row: any) => <input type="checkbox" checked={row.warning} />,
+            selector: (row: any) => <input type="checkbox" defaultChecked={row.warning} />,
             sortable: true
         },
         {
             name: 'Disabled',
-            selector: (row: any) => <input type="checkbox" checked={row.disabled} />,
+            selector: (row: any) => <input type="checkbox" defaultChecked={row.disabled} />,
             sortable: true
         },
     ];
