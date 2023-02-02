@@ -59,7 +59,7 @@ const List = ({ createBike }: any) => {
                     <input type="checkbox" className="form-check-input" id="disabled" {...register("disabled", {})} />
                     <label className="form-check-label" htmlFor="disabled">Disabled</label>
                 </div>
-                <input type="submit" />
+                <button type="submit" className="btn btn-success">Create</button>
             </form>
 
         </div>

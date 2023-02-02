@@ -1,23 +1,12 @@
 import DataTable from 'react-data-table-component';
 import React from "react";
 
-const List = ({ list }: any) => {
+const List = ({ list, deleteBike, deleteManyBikes }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
     const [toggledClearRows, setToggleClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
         setSelectedRows(selectedRows);
-    };
-
-    const removeSelectedBikes = () => {
-        console.log(selectedRows.id);
-        // console.log(selectedRows);
-        
-        // if (selectedRows.length > 0) {
-        //     // deleteBike(selectedRows)
-        // }
-        // setToggleClearRows(!toggledClearRows);
-        // setSelectedRows([])
     };
 
     const columns = [
@@ -41,14 +30,25 @@ const List = ({ list }: any) => {
             selector: (row: any) => <input type="checkbox" defaultChecked={row.disabled} />,
             sortable: true
         },
+        {
+            name: 'Operations',
+            selector: (row: any) =>
+                <div>
+                    <button type="button" className='btn btn-info me-2'>Update</button>
+                    <button type="button" className='btn btn-danger' onClick={() => {
+                        deleteBike(row.id)
+                    }}>Delete</button>
+                </div>,
+            sortable: true
+        },
     ];
 
 
     return (
         <div>
-            <button type='button' onClick={() => {
-                    removeSelectedBikes()
-                }}>AAAA</button>
+            <button type='button' className='btn btn-danger mt-2 mb-2 ms-2' disabled={selectedRows.length === 0} onClick={() => {
+                deleteManyBikes(selectedRows)
+            }}>Delete selected</button>
             {
                 <DataTable
                     columns={columns}
@@ -57,7 +57,6 @@ const List = ({ list }: any) => {
                     selectableRows
                     onSelectedRowsChange={handleChange}
                     clearSelectedRows={toggledClearRows}
-
                 />
             }
         </div>

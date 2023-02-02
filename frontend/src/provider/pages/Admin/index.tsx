@@ -5,12 +5,12 @@ import { useBikes } from "../../hooks/useBikes";
 
 
 const Admin = () => {
-    const { bikes, createBike } = useBikes();
+    const { bikes, createBike, deleteBike, deleteManyBikes } = useBikes();
 
     return (
         <div>
             <Create createBike={createBike}></Create>
-            {bikes ? <List list={bikes}></List> : <div>Loading...</div>}
+            {bikes ? <List list={bikes} deleteBike={deleteBike} deleteManyBikes={deleteManyBikes}></List> : <div>Loading...</div>}
         </div>
     );
 }

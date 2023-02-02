@@ -16,6 +16,19 @@ const bikeConsumer: any = {
             data: data
         })
     },
+    deleteOne: (data: any) => {
+        return Api({
+            method: "delete",
+            url: secret.DJANGO_APP_URL + "/bike/" + data,
+        })
+    },
+    deleteMany: (data: any) => {
+        return Api({
+            method: "post",
+            url: secret.DJANGO_APP_URL + "/bike/deleteMany/",
+            data: data
+        })
+    },
 }
 
 export default bikeConsumer;
