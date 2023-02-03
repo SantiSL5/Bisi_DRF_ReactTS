@@ -13,6 +13,31 @@ const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any
         updateBike(data);
     };
 
+    const customSort = (rows: any, selector: any, direction: any) => {
+        return rows.sort((rowA: any, rowB: any) => {
+            const aField = selector(rowA)
+            const bField = selector(rowB)
+
+            let comparison = 0;
+            console.log(aField.props)
+            if (aField.props || bField.props) {
+                if (aField.props.checked) {
+                    comparison = 1;
+                } else if (bField.props.checked) {
+                    comparison = -1;
+                }
+            }else {
+                if (aField > bField) {
+                    comparison = 1;
+                } else if (aField < bField) {
+                    comparison = -1;
+                }
+            }
+
+            return direction === 'desc' ? comparison * -1 : comparison;
+        });
+    };
+
     const columns = [
         {
             name: 'ID',
@@ -36,7 +61,7 @@ const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any
             selector: (row: any) => <input type="checkbox" checked={row.disabled}
                 onChange={() => clickUpdate({ data: { data: { disabled: !row.disabled }, id: row.id } })}
             />,
-            sortable: true
+            sortable: true,
         },
         {
             name: 'Operations',
@@ -60,6 +85,7 @@ const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any
             }}>Delete selected</button>
             {
                 <DataTable
+                    sortFunction={customSort}
                     columns={columns}
                     data={list}
                     pagination
