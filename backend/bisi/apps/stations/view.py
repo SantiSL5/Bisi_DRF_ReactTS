@@ -1,6 +1,7 @@
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import StationSerializer
+from ..slots .serializers import SlotSerializer
 # from rest_framework.exceptions import NotFound
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.response import Response 
@@ -35,8 +36,37 @@ class StationView(viewsets.GenericViewSet):
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        if request.data['slots']: 
+            if isinstance(request.data['slots'], int):
+                for slot in range(1,request.data['slots'] + 1):
+                    sserializer_context = {
+                        'number': slot,
+                        'station': serializer.data['id'],
+                        'bike': None, 
+                        'warning': False,
+                        'disabled': False,
+                    }
 
+                    sserializer_data = {
+                        'number': slot,
+                        'station': serializer.data['id'],
+                        'bike': None, 
+                        'warning': False,
+                        'disabled': False,
+                    }
+
+                    sserializer = SlotSerializer (
+                        data = sserializer_data,
+                        context = sserializer_context
+                    )
+
+                    sserializer.is_valid(raise_exception=True)
+                    sserializer.save() 
+            else:
+                return Response({"slots": "Slots must be a number"}, status=status.HTTP_200_OK)
+            
         return Response(serializer.data, status=status.HTTP_200_OK)
+        
     
     def updateStation(self, request, id):
         station = get_object_or_404(Station.objects.all(), id=id)
