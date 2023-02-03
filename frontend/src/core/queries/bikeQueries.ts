@@ -4,6 +4,7 @@ const bikeQueries: any = {
     createBike: "createOne",
     deleteBike: "deleteOne",
     deleteManyBikes: "deleteMany",
+    updateBike: "updateOne",
 }
 
 export default bikeQueries;

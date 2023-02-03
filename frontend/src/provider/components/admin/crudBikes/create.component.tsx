@@ -7,18 +7,25 @@ interface IFormInputs {
     disabled: boolean,
 }
 
-const List = ({ createBike }: any) => {
+const List = ({ createBike, operation, updateData, updateBike }: any) => {
 
     const {
         register,
         formState: { errors },
-        handleSubmit
+        handleSubmit,
+        setValue
     } = useForm<IFormInputs>({
         criteriaMode: "all"
     });
 
+    if (updateData) {
+        setValue("number", updateData.number)
+        setValue("warning", updateData.warning)
+        setValue("disabled", updateData.disabled)
+    }
+
     const onSubmit = (data: IFormInputs) => {
-        createBike(data)
+        operation === "create" ? createBike(data) : updateBike({ data: data, id: updateData.id });
     };
 
     return (
@@ -59,7 +66,10 @@ const List = ({ createBike }: any) => {
                     <input type="checkbox" className="form-check-input" id="disabled" {...register("disabled", {})} />
                     <label className="form-check-label" htmlFor="disabled">Disabled</label>
                 </div>
-                <button type="submit" className="btn btn-success">Create</button>
+
+                {operation === "create"
+                    ? <button type="submit" className="btn btn-success">Create</button>
+                    : <button type="submit" className="btn btn-info">Update</button>}
             </form>
 
         </div>

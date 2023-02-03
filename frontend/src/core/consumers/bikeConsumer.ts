@@ -29,6 +29,13 @@ const bikeConsumer: any = {
             data: data
         })
     },
+    updateOne: (data: any) => {
+        return Api({
+            method: "put",
+            url: secret.DJANGO_APP_URL + "/bike/" + data.id,
+            data: data.data
+        })
+    },
 }
 
 export default bikeConsumer;

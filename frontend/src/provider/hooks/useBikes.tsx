@@ -6,12 +6,10 @@ import { toast } from 'react-toastify'
 export function useBikes() {
 
     const [bikes, setBikes]: any = useState(undefined);
-    const [load, setLoad]: any = useState(true)
 
     useEffect(() => {
         consume(queryConsumer.apiBike, bikeQueries.getAllBikes).then((res: any) => {
             setBikes(res.data);
-
         })
     }, [])
 
@@ -35,12 +33,10 @@ export function useBikes() {
     })
 
     const deleteManyBikes = ((data: any) => {
-
         let res: any = { ids: [] };
         data.map((e: any) => {
             res.ids.push(e.id);
         })
-
         consume(queryConsumer.apiBike, bikeQueries.deleteManyBikes, res).then(() => {
             const array = bikes.filter((x: any) => {
                 return res.ids.indexOf(x.id) < 0;
@@ -52,6 +48,18 @@ export function useBikes() {
         })
     })
 
-    return { bikes, createBike, setLoad, deleteBike, deleteManyBikes };
+    const updateBike = ((data: any) => {
+        consume(queryConsumer.apiBike, bikeQueries.updateBike, data).then((res: any) => {
+            let aux = [...bikes];
+            let index = aux.findIndex((x: any) => x.id === data.id);
+            aux[index] = res.data;
+            setBikes(aux)
+            toast.success("Updated successfully", { theme: "dark" })
+        }).catch(e => {
+            toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
+        })
+    })
+
+    return { bikes, createBike, deleteBike, deleteManyBikes, updateBike };
 
 }

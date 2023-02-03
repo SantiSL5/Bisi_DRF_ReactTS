@@ -1,12 +1,16 @@
 import DataTable from 'react-data-table-component';
 import React from "react";
 
-const List = ({ list, deleteBike, deleteManyBikes }: any) => {
+const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
     const [toggledClearRows, setToggleClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
         setSelectedRows(selectedRows);
+    };
+
+    const clickUpdate = ({ data }: any) => {
+        updateBike(data);
     };
 
     const columns = [
@@ -22,19 +26,25 @@ const List = ({ list, deleteBike, deleteManyBikes }: any) => {
         },
         {
             name: 'Warning',
-            selector: (row: any) => <input type="checkbox" defaultChecked={row.warning} />,
+            selector: (row: any) => <input type="checkbox" checked={row.warning}
+                onClick={() => clickUpdate({ data: { data: { warning: !row.warning }, id: row.id } })}
+            />,
             sortable: true
         },
         {
             name: 'Disabled',
-            selector: (row: any) => <input type="checkbox" defaultChecked={row.disabled} />,
+            selector: (row: any) => <input type="checkbox" checked={row.disabled}
+                onChange={() => clickUpdate({ data: { data: { disabled: !row.disabled }, id: row.id } })}
+            />,
             sortable: true
         },
         {
             name: 'Operations',
             selector: (row: any) =>
                 <div>
-                    <button type="button" className='btn btn-info me-2'>Update</button>
+                    <button type="button" className='btn btn-info me-2' onClick={() => {
+                        changeForm(row, "update")
+                    }}>Update</button>
                     <button type="button" className='btn btn-danger' onClick={() => {
                         deleteBike(row.id)
                     }}>Delete</button>
@@ -42,7 +52,6 @@ const List = ({ list, deleteBike, deleteManyBikes }: any) => {
             sortable: true
         },
     ];
-
 
     return (
         <div>
