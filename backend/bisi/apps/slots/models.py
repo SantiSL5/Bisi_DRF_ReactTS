@@ -10,6 +10,7 @@ class Slot(TimestampedModel):
 
     class Meta:
         # Gives the proper plural name for admin
+        unique_together = ('number', 'station',)
         verbose_name_plural = "Slots"
 
     def __str__(self):
