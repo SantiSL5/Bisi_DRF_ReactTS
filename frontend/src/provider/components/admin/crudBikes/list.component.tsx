@@ -27,7 +27,7 @@ const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any
         {
             name: 'Warning',
             selector: (row: any) => <input type="checkbox" checked={row.warning}
-                onClick={() => clickUpdate({ data: { data: { warning: !row.warning }, id: row.id } })}
+                onChange={() => clickUpdate({ data: { data: { warning: !row.warning }, id: row.id } })}
             />,
             sortable: true
         },
