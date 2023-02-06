@@ -3,7 +3,8 @@ interface FooterProps {
 }
 
 const Footer = (props: FooterProps) => {
-    return <span>{props.title}</span>
+    return <div></div> 
+    // <footer className="footer">{props.title}Footer</footer>
 }
 
 export default Footer;

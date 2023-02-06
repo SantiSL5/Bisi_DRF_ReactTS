@@ -8,7 +8,8 @@ const Layout = (props: any) => {
             display: "flex",
             flexFlow: "column",
             gap: "5rem",
-            backgroundColor: "fuchsia"
+            // backgroundColor: "fuchsia"
+            backgroundColor: "#303039"
         }}>
             <Header title="Bisi"></Header>
             {props.children}

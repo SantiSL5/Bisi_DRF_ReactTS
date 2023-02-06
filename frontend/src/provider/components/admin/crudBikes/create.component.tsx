@@ -32,7 +32,7 @@ const List = ({ createBike, operation, updateData, updateBike }: any) => {
         <div className="container">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-2">
-                    <label htmlFor="Number" className="form-label">Number:
+                    <label htmlFor="Number" className="form-label text-white">Number:
                         <input id="Number" type="number" className="form-control mt-2"
                             {...register("number", {
                                 required: "This input is required.",
@@ -59,12 +59,12 @@ const List = ({ createBike, operation, updateData, updateBike }: any) => {
 
                 <div className="mb-3 form-check">
                     <input type="checkbox" className="form-check-input" id="warning" {...register("warning", {})} />
-                    <label className="form-check-label" htmlFor="warning">Warning</label>
+                    <label className="form-check-label text-white" htmlFor="warning">Warning</label>
                 </div>
 
                 <div className="mb-3 form-check">
                     <input type="checkbox" className="form-check-input" id="disabled" {...register("disabled", {})} />
-                    <label className="form-check-label" htmlFor="disabled">Disabled</label>
+                    <label className="form-check-label text-white" htmlFor="disabled">Disabled</label>
                 </div>
 
                 {operation === "create"

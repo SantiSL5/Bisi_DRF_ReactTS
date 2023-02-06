@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useState } from "react";
-import List from "../../components/admin/crudBikes/list.component";
-import Create from "../../components/admin/crudBikes/create.component";
+import ListBikes from "../../components/admin/crudBikes/list.component";
+import CreateBike from "../../components/admin/crudBikes/create.component";
 import { useBikes } from "../../hooks/useBikes";
+import Spinner from "../../components/spinner/spinner.component";
 
 
 const Admin = () => {
@@ -17,8 +18,8 @@ const Admin = () => {
 
     return (
         <div>
-            <Create createBike={createBike} operation={op} updateData={updateData} updateBike={updateBike}></Create>
-            {bikes ? <List list={bikes} deleteBike={deleteBike} deleteManyBikes={deleteManyBikes} changeForm={changeForm} updateBike={updateBike}></List> : <div>Loading...</div>}
+            <CreateBike createBike={createBike} operation={op} updateData={updateData} updateBike={updateBike}></CreateBike>
+            {bikes ? <ListBikes list={bikes} deleteBike={deleteBike} deleteManyBikes={deleteManyBikes} changeForm={changeForm} updateBike={updateBike}></ListBikes> : <Spinner/>}
         </div>
     );
 }

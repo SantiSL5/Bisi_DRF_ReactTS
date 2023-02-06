@@ -1,3 +1,22 @@
 .about div {
     background-color: lightgreen;
 }
+
+html {
+    background-color: #303039;
+}
+
+.footer {
+    background-color: #212529;
+}
+
+/* body {
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+} */
+
+/* footer {
+    min-height: 20vh;
+} */
