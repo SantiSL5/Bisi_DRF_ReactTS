@@ -1,3 +1,4 @@
+from rest_framework.generics import get_object_or_404
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
@@ -41,3 +42,14 @@ class BikeSerializer(serializers.ModelSerializer):
             serialized_bikes.append(serialized_bike)
 
         return bikes,serialized_bikes
+    
+    def getBikeById(id):
+        if id != None:
+            bike = get_object_or_404(Bike.objects.all(), id=id)
+            serialized_bike = BikeSerializer.to_bike(bike)
+            return serialized_bike
+        
+        return None
+    
+    
+    

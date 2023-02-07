@@ -28,6 +28,16 @@ class SlotSerializer(serializers.ModelSerializer):
             'disabled' : instance.disabled
         }
 
+    def to_slot_create(instance):
+        return {
+            'id': instance["id"],
+            'number' : instance["number"],
+            'station' : StationSerializer.getStationsById(instance["station"]),
+            'bike': BikeSerializer.getBikeById(instance["bike"]),
+            'warning' : instance["warning"],
+            'disabled' : instance["disabled"]
+        }
+
     def getAllSlots(context):
 
         slots = Slot.objects.all()

@@ -38,7 +38,9 @@ class SlotView(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serialized_data = SlotSerializer.to_slot_create(serializer.data)
+
+        return Response(serialized_data, status=status.HTTP_200_OK)
     
     def updateSlot(self, request, id):
         slot = get_object_or_404(Slot.objects.all(), id=id)

@@ -1,3 +1,4 @@
+from rest_framework.generics import get_object_or_404
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
@@ -43,3 +44,10 @@ class StationSerializer(serializers.ModelSerializer):
             serialized_stations.append(serialized_station)
 
         return stations,serialized_stations
+    
+    def getStationsById(id):
+
+        station = get_object_or_404(Station.objects.all(), id=id)
+        serialized_station = StationSerializer.to_station(station)
+        
+        return serialized_station
