@@ -19,7 +19,6 @@ const List = ({ list, deleteBike, deleteManyBikes, changeForm, updateBike }: any
             const bField = selector(rowB)
 
             let comparison = 0;
-            console.log(aField.props)
             if (aField.props || bField.props) {
                 if (aField.props.checked) {
                     comparison = 1;

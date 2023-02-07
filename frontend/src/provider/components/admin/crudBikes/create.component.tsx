@@ -29,7 +29,7 @@ const List = ({ createBike, operation, updateData, updateBike }: any) => {
     };
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-2">
                     <label htmlFor="Number" className="form-label text-white">Number:

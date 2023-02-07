@@ -1,0 +1,8 @@
+.menuAdmin {
+    background-color: #24262c;
+    border-radius: 15px;
+}
+
+.menuAdmin a {
+    cursor: pointer;
+}
