@@ -1,25 +1,28 @@
-// import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
+import { useStations } from "../../hooks/useStations";
 import "./styles.css";
-// import Spinner from "../../components/spinner/spinner.component";
+import Spinner from "../../components/spinner/spinner.component";
 import MenuAdmin from "../../components/admin/menuAdmin/menuAdmin.component";
+import CreateStation from "../../components/admin/crudStations/create.component"
+import ListStations from "../../components/admin/crudStations/list.component"
 
 
 const AdminStations = () => {
-    // const { bikes, createBike, deleteBike, deleteManyBikes, updateBike } = useBikes();
-    // const [op, setOp]: any = useState("create");
-    // const [updateData, setupdateData]: any = useState();
+    const { stations, createStation, deleteStation, deleteManyStations, updateStation } = useStations();
+    const [op, setOp]: any = useState("create");
+    const [updateData, setupdateData]: any = useState();
 
 
-    // const changeForm = (data: any, op: string) => {
-    //     setOp(op);
-    //     setupdateData(data)
-    // }
+    const changeForm = (data: any, op: string) => {
+        setOp(op);
+        setupdateData(data)
+    }
 
     return (
         <div className="adminView">
             <MenuAdmin />
-            {/* <CreateBike createBike={createBike} operation={op} updateData={updateData} updateBike={updateBike} />
-            {bikes ? <ListBikes list={bikes} deleteBike={deleteBike} deleteManyBikes={deleteManyBikes} changeForm={changeForm} updateBike={updateBike}></ListBikes> : <Spinner />} */}
+            <CreateStation createStation={createStation} operation={op} updateData={updateData} updateStation={updateStation} />
+            {stations ? <ListStations list={stations} deleteStation={deleteStation} deleteManyStations={deleteManyStations} changeForm={changeForm} updateStation={updateStation}></ListStations> : <Spinner />}
         </div>
     );
 }

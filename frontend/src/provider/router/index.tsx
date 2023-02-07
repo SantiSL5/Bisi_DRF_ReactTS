@@ -5,7 +5,7 @@ import Admin from "../pages/Admin/";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "../layout";
 // import Test from "../pages/About/test.page";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminBikes from "../pages/Admin/bikes";
 import AdminStations from "../pages/Admin/stations";
@@ -17,9 +17,6 @@ const Router = () => {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
-                    {/* <Route path="/about/" element={<About />}>
-                        <Route path=":id" element={<Test />}></Route>
-                    </Route> */}
                     <Route path="/gancho/" element={<Gancho />}></Route>
                     <Route path="/admin/">
                         <Route index element={<Admin />} />
