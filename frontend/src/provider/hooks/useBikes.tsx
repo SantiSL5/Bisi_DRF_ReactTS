@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import consume from '../router/consumer';
 import { queryConsumer, bikeQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
@@ -35,7 +35,7 @@ export function useBikes() {
     const deleteManyBikes = ((data: any) => {
         let res: any = { ids: [] };
         data.map((e: any) => {
-            res.ids.push(e.id);
+            return res.ids.push(e.id);
         })
         consume(queryConsumer.apiBike, bikeQueries.deleteManyBikes, res).then(() => {
             const array = bikes.filter((x: any) => {

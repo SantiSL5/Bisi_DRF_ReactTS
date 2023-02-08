@@ -3,7 +3,7 @@ import React from "react";
 
 const List = ({ list, deleteSlot, deleteManySlots, changeForm, updateSlot }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
-    const [toggledClearRows, setToggleClearRows] = React.useState(false);
+    const [toggledClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
         setSelectedRows(selectedRows);
@@ -54,7 +54,7 @@ const List = ({ list, deleteSlot, deleteManySlots, changeForm, updateSlot }: any
             sortable: true
         },
         {
-            name: 'Station ID',
+            name: 'Station Name',
             selector: (row: any) => row.station.name,
             sortable: true
         },
@@ -64,7 +64,7 @@ const List = ({ list, deleteSlot, deleteManySlots, changeForm, updateSlot }: any
             sortable: true
         },
         {
-            name: 'Bike ID',
+            name: 'Bike Number',
             selector: (row: any) => <span> {row.bike != null ? row.bike.number : "null"}</span>,
             sortable: true
         },

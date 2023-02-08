@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import consume from '../router/consumer';
 import { queryConsumer, stationQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
@@ -14,7 +14,7 @@ export function useStations() {
     }, [])
 
     const createStation = ((data: any) => {
-        if (data.slots != "") {
+        if (data.slots !== "") {
             data.slots = parseInt(data.slots)
         }
         consume(queryConsumer.apiStation, stationQueries.createStation, data).then((res: any) => {
@@ -38,7 +38,7 @@ export function useStations() {
     const deleteManyStations = ((data: any) => {
         let res: any = { ids: [] };
         data.map((e: any) => {
-            res.ids.push(e.id);
+            return res.ids.push(e.id);
         })
         consume(queryConsumer.apiStation, stationQueries.deleteManyStations, res).then(() => {
             const array = stations.filter((x: any) => {

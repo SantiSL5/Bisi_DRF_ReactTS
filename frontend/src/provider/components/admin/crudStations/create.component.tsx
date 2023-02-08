@@ -56,7 +56,7 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
                 </div>
 
                 {(() => {
-                    if (operation == "create") {
+                    if (operation === "create") {
                         return <div className="mb-2">
                             <label htmlFor="Slots" className="form-label text-white">Number of Slots:
                                 <input id="numberSlots" type="number" className="form-control mt-2"

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import consume from '../router/consumer';
 import { queryConsumer, slotQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
@@ -41,7 +41,7 @@ export function useSlots() {
     const deleteManySlots = ((data: any) => {
         let res: any = { ids: [] };
         data.map((e: any) => {
-            res.ids.push(e.id);
+            return res.ids.push(e.id);
         })
         consume(queryConsumer.apiSlot, slotQueries.deleteManySlots, res).then(() => {
             const array = slots.filter((x: any) => {

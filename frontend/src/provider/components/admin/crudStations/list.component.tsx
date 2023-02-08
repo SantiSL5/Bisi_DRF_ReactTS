@@ -3,7 +3,7 @@ import React from "react";
 
 const List = ({ list, deleteStation, deleteManyStations, changeForm, updateStation }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
-    const [toggledClearRows, setToggleClearRows] = React.useState(false);
+    const [toggledClearRows] = React.useState(false);
 
     const handleChange = ({ selectedRows }: any) => {
         setSelectedRows(selectedRows);

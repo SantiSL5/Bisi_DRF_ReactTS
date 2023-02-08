@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useState } from "react";
 import { useStations } from "../../hooks/useStations";
 import "./styles.css";
 import Spinner from "../../components/spinner/spinner.component";

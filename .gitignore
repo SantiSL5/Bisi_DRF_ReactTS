@@ -109,3 +109,4 @@ data
 **/examples-cypress
 **/assets
 **/secrets
+**/secret.ts

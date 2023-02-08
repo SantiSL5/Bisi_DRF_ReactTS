@@ -10,7 +10,7 @@ const Header = (props: HeaderProps) => {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <a href="#" className="navbar-brand">{props.title}</a>
+                    <Link className="navbar-brand" to="/">{props.title}</Link>
                     <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span className="navbar-toggler-icon"></span>
                     </button>
