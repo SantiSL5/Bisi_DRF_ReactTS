@@ -2,13 +2,14 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from 'react-hook-form';
 
 interface IFormInputs {
-    number: number,
-    station: number,
+    number: string,
+    station: string,
+    bike: string,
     warning: boolean,
     disabled: boolean,
 }
 
-const List = ({ createSlot, operation, updateData, updateSlot }: any) => {
+const List = ({ createSlot, operation, updateData, updateSlot, changeForm }: any) => {
 
     const {
         register,
@@ -22,8 +23,17 @@ const List = ({ createSlot, operation, updateData, updateSlot }: any) => {
     if (updateData) {
         setValue("number", updateData.number)
         setValue("station", updateData.station.id)
+        updateData.bike ? setValue("bike", updateData.bike.id) : setValue("bike", "")
         setValue("warning", updateData.warning)
         setValue("disabled", updateData.disabled)
+    }
+
+    if (operation === "create" && updateData !== undefined) {
+        setValue("number", "")
+        setValue("station", "")
+        setValue("bike", "")
+        setValue("warning", false)
+        setValue("disabled", false)
     }
 
     const onSubmit = (data: IFormInputs) => {
@@ -48,7 +58,6 @@ const List = ({ createSlot, operation, updateData, updateSlot }: any) => {
                             errors={errors}
                             name="number"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -74,7 +83,30 @@ const List = ({ createSlot, operation, updateData, updateSlot }: any) => {
                             errors={errors}
                             name="station"
                             render={({ messages }) => {
-                                console.log("messages", messages);
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <p key={type}>{message}</p>
+                                    ))
+                                    : null;
+                            }}
+                        />
+                    </label>
+                </div>
+
+                <div className="mb-2">
+                    <label htmlFor="Number" className="form-label text-white">Bike ID:
+                        <input id="Number" type="number" className="form-control mt-2"
+                            {...register("bike", {
+                                maxLength: {
+                                    value: 4,
+                                    message: "This input exceed maxLength."
+                                }
+                            })}
+                        />
+                        <ErrorMessage
+                            errors={errors}
+                            name="bike"
+                            render={({ messages }) => {
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -97,7 +129,12 @@ const List = ({ createSlot, operation, updateData, updateSlot }: any) => {
 
                 {operation === "create"
                     ? <button type="submit" className="btn btn-success">Create</button>
-                    : <button type="submit" className="btn btn-info">Update</button>}
+                    : <div>
+                        <button type="submit" className="btn btn-info">Update</button>
+                        <button type="button" className="btn btn-success ms-3" onClick={
+                            () => changeForm(null, "create")
+                        }>Back to create</button>
+                    </div>}
             </form>
 
         </div>

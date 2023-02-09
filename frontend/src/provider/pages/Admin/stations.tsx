@@ -14,14 +14,19 @@ const AdminStations = () => {
 
 
     const changeForm = (data: any, op: string) => {
-        setOp(op);
-        setupdateData(data)
+        if (op == "create") {
+            setOp(op);
+            setupdateData(null)
+        } else {
+            setOp(op);
+            setupdateData(data)
+        }
     }
 
     return (
         <div className="adminView">
             <MenuAdmin />
-            <CreateStation createStation={createStation} operation={op} updateData={updateData} updateStation={updateStation} />
+            <CreateStation createStation={createStation} operation={op} updateData={updateData} updateStation={updateStation} changeForm={changeForm} />
             {stations ? <ListStations list={stations} deleteStation={deleteStation} deleteManyStations={deleteManyStations} changeForm={changeForm} updateStation={updateStation}></ListStations> : <Spinner />}
         </div>
     );

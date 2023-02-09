@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 
 interface IFormInputs {
     name: string,
-    slots: number,
+    numberSlots: string,
     warning: boolean,
     disabled: boolean,
 }
 
-const List = ({ createStation, operation, updateData, updateStation }: any) => {
+const List = ({ createStation, operation, updateData, updateStation, changeForm }: any) => {
 
     const {
         register,
@@ -20,11 +20,17 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
     });
 
     if (updateData) {
-        setValue("name", updateData.numberSlots)
-        setValue("slots", updateData.numberSlots)
+        setValue("name", updateData.name)
         setValue("warning", updateData.warning)
         setValue("disabled", updateData.disabled)
     }
+
+    if (operation === "create" && updateData !== undefined) {
+        setValue("name", "")
+        setValue("warning", false)
+        setValue("disabled", false)
+    }
+
 
     const onSubmit = (data: IFormInputs) => {
         operation === "create" ? createStation(data) : updateStation({ data: data, id: updateData.id });
@@ -60,7 +66,7 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
                         return <div className="mb-2">
                             <label htmlFor="Slots" className="form-label text-white">Number of Slots:
                                 <input id="numberSlots" type="number" className="form-control mt-2"
-                                    {...register("slots", {
+                                    {...register("numberSlots", {
                                         maxLength: {
                                             value: 2,
                                             message: "This input exceed maxLength."
@@ -69,7 +75,7 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="slots"
+                                    name="numberSlots"
                                     render={({ messages }) => {
                                         console.log("messages", messages);
                                         return messages
@@ -95,7 +101,12 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
 
                 {operation === "create"
                     ? <button type="submit" className="btn btn-success">Create</button>
-                    : <button type="submit" className="btn btn-info">Update</button>}
+                    : <div>
+                        <button type="submit" className="btn btn-info">Update</button>
+                        <button type="button" className="btn btn-success ms-3" onClick={
+                            () => changeForm(null, "create")
+                        }>Back to create</button>
+                    </div>}
             </form>
 
         </div>

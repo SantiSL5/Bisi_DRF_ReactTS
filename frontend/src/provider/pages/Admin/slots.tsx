@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 import ListSlots from "../../components/admin/crudSlots/list.component";
-import CreateSlot from "../../components/admin/crudSlots/create.component"; 
+import CreateSlot from "../../components/admin/crudSlots/create.component";
 import Spinner from "../../components/spinner/spinner.component";
 import MenuAdmin from "../../components/admin/menuAdmin/menuAdmin.component";
 import { useSlots } from "../../hooks/useSlots";
@@ -12,14 +12,19 @@ const AdminSlots = () => {
     const [updateData, setupdateData]: any = useState();
 
     const changeForm = (data: any, op: string) => {
-        setOp(op);
-        setupdateData(data)
+        if (op == "create") {
+            setOp(op);
+            setupdateData(null)
+        } else {
+            setOp(op);
+            setupdateData(data)
+        }
     }
 
     return (
         <div className="adminView">
             <MenuAdmin />
-            <CreateSlot createSlot={createSlot} operation={op} updateData={updateData} updateSlot={updateSlot} />
+            <CreateSlot createSlot={createSlot} operation={op} updateData={updateData} updateSlot={updateSlot} changeForm={changeForm} />
             {slots ? <ListSlots list={slots} deleteSlot={deleteSlot} deleteManySlots={deleteManySlots} changeForm={changeForm} updateSlot={updateSlot}></ListSlots> : <Spinner />}
         </div>
     );
