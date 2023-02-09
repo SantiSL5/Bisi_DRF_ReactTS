@@ -30,7 +30,7 @@ env.read_env(os.path.join(BASE_DIR+'/bisi', '.env'))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'DJANGO_SECRET'
+SECRET_KEY = env('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
+    'bisi.apps.users',
     'bisi.apps.bikes',
     'bisi.apps.stations',
     'bisi.apps.slots',
@@ -187,7 +188,7 @@ STATIC_URL = 'static/'
 # # `authentication.User` tells Django we are referring to the `User` model in
 # # the `authentication` module. This module is registered above in a setting
 # # called `INSTALLED_APPS`.
-# AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'users.User'
 
 # REST_FRAMEWORK = {
 #     'EXCEPTION_HANDLER': 'bisi.apps.core.exceptions.core_exception_handler',

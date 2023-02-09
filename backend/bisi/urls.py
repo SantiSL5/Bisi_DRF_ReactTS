@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/bike/', include('bisi.apps.bikes.urls')),
     path('api/station/', include('bisi.apps.stations.urls')),
-    path('api/slot/', include('bisi.apps.slots.urls'))
+    path('api/slot/', include('bisi.apps.slots.urls')),
+    path('api/user/', include('bisi.apps.users.urls'))
 ]
