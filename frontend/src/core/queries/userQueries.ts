@@ -1,8 +1,8 @@
 
 const userQueries: any = {
-    getUser: "get",         // recibido : devuelto
-    getRandom: "getRandom",
-    postUser: "post",
+    register: "register",
+    login: "login",
+    refreshToken: "refreshToken",
 }
 
 export default userQueries;

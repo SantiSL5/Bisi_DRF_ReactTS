@@ -1,25 +1,15 @@
+import secrets from "../../secret";
 import Api from "../api/api";
 
 const userConsumer: any = {
 
-    get: () => {
+    register: (data: any) => {
         return Api({
-            method: "get",
-            url: "https://pokeapi.co/api/v2/pokemon/ditto",
+            method: "post",
+            url: secrets.DJANGO_APP_URL + "/user/register/",
+            data: data,
         })
     },
-    getRandom: () => {
-        const random = Math.floor(Math.random() * 1007) + 1;
-
-        return Api({
-            method: "get",
-            url: "https://pokeapi.co/api/v2/pokemon/" + random,
-        })
-    },
-    post: () => {
-        console.log('post');
-
-    }
 }
 
 export default userConsumer;

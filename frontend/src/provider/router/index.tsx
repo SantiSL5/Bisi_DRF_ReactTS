@@ -1,6 +1,5 @@
 import Home from "../pages/Home/";
 // import About from "../pages/About/";
-import Gancho from "../pages/Gancho/";
 import Admin from "../pages/Admin/";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "../layout";
@@ -17,7 +16,6 @@ const Router = () => {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
-                    <Route path="/gancho/" element={<Gancho />}></Route>
                     <Route path="/admin/">
                         <Route index element={<Admin />} />
                         <Route path="stations/" element={<AdminStations />} />
