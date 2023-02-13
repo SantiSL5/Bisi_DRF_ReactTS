@@ -5,13 +5,13 @@ import { queryConsumer, userQueries, jwtQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 
-export function useBikses() {
+export function useUsers() {
 
     const navigate = useNavigate();
     const [user, setUser]: any = useState();
     const [token, setToken]: any = useState();
 
-    const register = useCallback((data: any) => {
+    const registerH = useCallback((data: any) => {
         consume(queryConsumer.apiUser, userQueries.register, data).then((res: any) => {
             setUser(res.data.user);
             setToken(res.data.token);
@@ -48,6 +48,6 @@ export function useBikses() {
 
     })
 
-    return { user, register, login, logout, refreshToken };
+    return { user, registerH, login, logout, refreshToken };
 
 }

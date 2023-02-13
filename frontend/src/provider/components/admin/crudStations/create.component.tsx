@@ -8,7 +8,7 @@ interface IFormInputs {
     disabled: boolean,
 }
 
-const List = ({ createStation, operation, updateData, updateStation }: any) => {
+const CreateUpdate = ({ createStation, operation, updateData, updateStation }: any) => {
 
     const {
         register,
@@ -102,4 +102,4 @@ const List = ({ createStation, operation, updateData, updateStation }: any) => {
     );
 }
 
-export default List;
+export default CreateUpdate;

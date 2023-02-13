@@ -7,7 +7,6 @@ const Layout = (props: any) => {
         <div style={{
             display: "flex",
             flexFlow: "column",
-            gap: "5rem",
             // backgroundColor: "fuchsia"
             backgroundColor: "#303039"
         }}>

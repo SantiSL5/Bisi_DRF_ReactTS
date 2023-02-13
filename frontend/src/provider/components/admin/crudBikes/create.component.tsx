@@ -7,7 +7,7 @@ interface IFormInputs {
     disabled: boolean,
 }
 
-const List = ({ createBike, operation, updateData, updateBike }: any) => {
+const CreateUpdate = ({ createBike, operation, updateData, updateBike }: any) => {
 
     const {
         register,
@@ -76,4 +76,4 @@ const List = ({ createBike, operation, updateData, updateBike }: any) => {
     );
 }
 
-export default List;
+export default CreateUpdate;
