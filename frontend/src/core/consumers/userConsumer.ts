@@ -17,6 +17,12 @@ const userConsumer: any = {
             data: data,
         })
     },
+    getUser: () => {
+        return Api({
+            method: "get",
+            url: secrets.DJANGO_APP_URL + "/user/user",
+        })
+    },
 }
 
 export default userConsumer;

@@ -48,23 +48,24 @@ class UserView(viewsets.GenericViewSet):
         serializer = userSerializer.login(serializer_context)
         return Response(serializer)
 
-# class UserAuthenticatedView(viewsets.GenericViewSet):
-#     permission_classes = [IsAuthenticated]
+class UserAuthenticatedView(viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated]
 
-#     def getUser(self, request):
-#         username = request.user
-#         serializer_context = {
-#             'username': username
-#         }
-#         serializer = userSerializer.getUser(context=serializer_context)
-#         return Response(serializer)
+    def getUser(self, request):
+                
+        user = request.user
+        serializer_context = {
+            'user': user
+        }
+        serializer = userSerializer.getUser(context=serializer_context)
+        return Response(serializer)
 
-#     def refreshToken(self, request):
-#         username = request.user
+    # def refreshToken(self, request):
+    #     username = request.user
 
-#         serializer_context = {
-#             'username': username
-#         }
+    #     serializer_context = {
+    #         'username': username
+    #     }
 
-#         serializer = userSerializer.refreshToken(serializer_context)
-#         return Response(serializer)
+    #     serializer = userSerializer.refreshToken(serializer_context)
+    #     return Response(serializer)

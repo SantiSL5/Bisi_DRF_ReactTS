@@ -1,11 +1,9 @@
 import Home from "../pages/Home/";
-// import About from "../pages/About/";
 import Admin from "../pages/Admin/";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from "../layout";
-// import Test from "../pages/About/test.page";
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Layout from "../layout";
 import AdminBikes from "../pages/Admin/bikes";
 import AdminStations from "../pages/Admin/stations";
 import AdminSlots from "../pages/Admin/slots";

@@ -9,18 +9,18 @@ class userSerializer(serializers.ModelSerializer):
         fields = ('password', 'email', 'username', 'types')
 
     def getUser(context):
-        username = context['username']
-        if username is None:
+        user = context['user']
+        if user is None:
             raise serializers.ValidationError(
                 'username is not find'
             )
-        user = User.objects.get(username=username)
+        user = User.objects.get(email=user.email)
 
         return {
             'user': {
                 'username': user.username,
                 'email': user.email,
-                'types': user.types
+                'type': user.type
             },
         }
 

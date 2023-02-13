@@ -18,7 +18,7 @@ export function useBikes() {
             const aux = [...bikes, res.data]
             toast.success("Created successfully", { theme: "dark" })
             setBikes(aux)
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -27,7 +27,7 @@ export function useBikes() {
         consume(queryConsumer.apiBike, bikeQueries.deleteBike, data).then((res: any) => {
             toast.success("Deleted successfully", { theme: "dark" })
             setBikes(bikes.filter((item: any) => data !== item.id));
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -43,7 +43,7 @@ export function useBikes() {
             });
             setBikes(array);
             toast.success("Deleted successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -55,7 +55,7 @@ export function useBikes() {
             aux[index] = res.data;
             setBikes(aux)
             toast.success("Updated successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e:any)  => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })

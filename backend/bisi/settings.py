@@ -190,16 +190,16 @@ STATIC_URL = 'static/'
 # # called `INSTALLED_APPS`.
 AUTH_USER_MODEL = 'users.User'
 
-# REST_FRAMEWORK = {
-#     'EXCEPTION_HANDLER': 'bisi.apps.core.exceptions.core_exception_handler',
-#     'NON_FIELD_ERRORS_KEY': 'error',
+REST_FRAMEWORK = {
+    # 'EXCEPTION_HANDLER': 'bisi.apps.core.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
 
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'bisi.apps.authentication.backends.JWTAuthentication',
-#     ),
-#     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-#     # 'PAGE_SIZE': 20,
-# }
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'bisi.apps.users.backends.JWTAuthentication',
+    ),
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 20,
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

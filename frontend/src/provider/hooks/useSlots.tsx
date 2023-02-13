@@ -18,9 +18,9 @@ export function useSlots() {
             const aux = [...slots, res.data]
             toast.success("Created successfully", { theme: "dark" })
             console.log(aux);
-            
+
             setSlots(aux)
-        }).catch(e => {
+        }).catch((e: any) => {
             if (e.response.data.non_field_errors) {
                 toast.error("There cannot be 2 slots with the same number in a station", { theme: "dark" })
             } else {
@@ -33,7 +33,7 @@ export function useSlots() {
         consume(queryConsumer.apiSlot, slotQueries.deleteSlot, data).then((res: any) => {
             toast.success("Deleted successfully", { theme: "dark" })
             setSlots(slots.filter((item: any) => data !== item.id));
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -49,7 +49,7 @@ export function useSlots() {
             });
             setSlots(array);
             toast.success("Deleted successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -61,7 +61,7 @@ export function useSlots() {
             aux[index] = res.data;
             setSlots(aux)
             toast.success("Updated successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e: any) => {
             if (e.response.data.non_field_errors) {
                 toast.error("There cannot be 2 slots with the same number in a station", { theme: "dark" })
             } else {

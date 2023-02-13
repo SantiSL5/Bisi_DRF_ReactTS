@@ -21,7 +21,7 @@ export function useStations() {
             const aux = [...stations, res.data]
             toast.success("Created successfully", { theme: "dark" })
             setStations(aux)
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -30,7 +30,7 @@ export function useStations() {
         consume(queryConsumer.apiStation, stationQueries.deleteStation, data).then((res: any) => {
             toast.success("Deleted successfully", { theme: "dark" })
             setStations(stations.filter((item: any) => data !== item.id));
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -46,7 +46,7 @@ export function useStations() {
             });
             setStations(array);
             toast.success("Deleted successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
@@ -58,7 +58,7 @@ export function useStations() {
             aux[index] = res.data;
             setStations(aux)
             toast.success("Updated successfully", { theme: "dark" })
-        }).catch(e => {
+        }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
