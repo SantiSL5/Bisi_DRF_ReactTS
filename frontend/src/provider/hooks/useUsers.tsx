@@ -23,10 +23,12 @@ export function useUsers() {
 
         if (token) {
             consume(queryConsumer.apiUser, userQueries.getUser).then((res: any) => {
-
                 setUser(res.data.user);
             }).catch((e: any) => {
-                console.log(e);
+                if (e.response.status == 403) {
+                    toast.error("Your session has expired, logging out...", { theme: "dark" })
+                    logout();
+                }
             })
         }
 
@@ -45,7 +47,7 @@ export function useUsers() {
 
         // return () => clearInterval(interval);
         // }
-    }, [token, setToken, user, setUser]);
+    }, [token]);
 
 
     const registerH = ((data: any) => {
@@ -55,6 +57,7 @@ export function useUsers() {
             consume(queryConsumer.apiJwt, jwtQueries.setToken, res.data.token);
             toast.success("User registered successfully, logging in...", { theme: "dark" })
             navigate('/');
+            window.location.reload();
         }).catch(() => {
             toast.error("Email is already taken", { theme: "dark" })
         })
@@ -67,6 +70,7 @@ export function useUsers() {
             consume(queryConsumer.apiJwt, jwtQueries.setToken, res.data.token);
             toast.success("Logging in...", { theme: "dark" })
             navigate('/');
+            window.location.reload();
         }).catch(() => {
             toast.error("Wrong email or password", { theme: "dark" })
         })
@@ -76,6 +80,7 @@ export function useUsers() {
         setUser(null);
         setToken(null);
         consume(queryConsumer.apiJwt, jwtQueries.removeToken);
+        window.location.reload();
         // navigate('/');
     })
 

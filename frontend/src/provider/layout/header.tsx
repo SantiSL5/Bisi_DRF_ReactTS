@@ -8,7 +8,6 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     const { user, token, logout } = useUsers();
-    console.log(user)
 
     return (
         <>

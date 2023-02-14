@@ -17,13 +17,13 @@ const root = ReactDOM.createRoot(
 const store = createStore(reducers, applyMiddleware(thunk))
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <div className='container-fluid' style={{ padding: 0 }}>
-        <App />
-      </div>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <div className='container-fluid' style={{ padding: 0 }}>
+      <App />
+    </div>
+  </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
