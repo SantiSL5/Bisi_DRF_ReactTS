@@ -4,6 +4,7 @@ const userQueries: any = {
     login: "login",
     refreshToken: "refreshToken",
     getUser: "getUser",
+    getUserType: "getUserType",
 }
 
 export default userQueries;

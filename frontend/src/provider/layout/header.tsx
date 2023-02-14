@@ -7,8 +7,8 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-    const { user, token, logout } = useUsers();
-
+    const { user, isAdmin, logout } = useUsers();
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <div className="navbar-nav">
                             <Link className="nav-item nav-link" to="/">Home</Link>
-                            <Link className="nav-item nav-link" to="/admin">Admin</Link>
+                            {isAdmin ? <Link className="nav-item nav-link" to="/admin">Admin</Link> : <></>}
                         </div>
                         <div className="navbar-nav ms-auto">
                             {user

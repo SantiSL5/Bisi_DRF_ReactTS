@@ -10,6 +10,8 @@ export function useUsers() {
 
     const navigate = useNavigate();
     const [user, setUser]: any = useState(undefined);
+    const [isAdmin, setIsAdmin]: any = useState(undefined);
+    // const [isAdmin, setIsAdmin]: any = useState(consume(queryConsumer.apiUser, userQueries.getUserType));
     const [token, setToken]: any = useState(consume(queryConsumer.apiJwt, jwtQueries.getToken));
 
     useEffect(() => {
@@ -24,6 +26,9 @@ export function useUsers() {
         if (token) {
             consume(queryConsumer.apiUser, userQueries.getUser).then((res: any) => {
                 setUser(res.data.user);
+                if (res.data.user.type === "admin") {
+                    setIsAdmin(true);
+                }
             }).catch((e: any) => {
                 if (e.response.status == 403) {
                     toast.error("Your session has expired, logging out...", { theme: "dark" })
@@ -47,7 +52,7 @@ export function useUsers() {
 
         // return () => clearInterval(interval);
         // }
-    }, [token]);
+    }, [token, isAdmin]);
 
 
     const registerH = ((data: any) => {
@@ -88,6 +93,6 @@ export function useUsers() {
 
     })
 
-    return { user, token, registerH, login, logout, refreshToken };
+    return { user, token, isAdmin, setIsAdmin, registerH, login, logout, refreshToken };
 
 }
