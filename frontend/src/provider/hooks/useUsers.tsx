@@ -23,9 +23,8 @@ export function useUsers() {
 
         if (token) {
             consume(queryConsumer.apiUser, userQueries.getUser).then((res: any) => {
-                console.log(res.data.user.username);
 
-                setUser(res.data.user.username);
+                setUser(res.data.user);
             }).catch((e: any) => {
                 console.log(e);
             })

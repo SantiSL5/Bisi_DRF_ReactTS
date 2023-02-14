@@ -8,6 +8,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     const { user, token, logout } = useUsers();
+    console.log(user)
 
     return (
         <>
@@ -24,7 +25,11 @@ const Header = (props: HeaderProps) => {
                         </div>
                         <div className="navbar-nav ms-auto">
                             {user
-                                ? <a className="nav-item nav-link" onClick={logout}>Logout</a>
+                                ?
+                                <div className="nav-item navbar-collapse">
+                                    <a className="nav-item nav-link">{user.username}</a>
+                                    <a className="nav-item nav-link" onClick={logout}>Logout</a>
+                                </div>
                                 : <Link className="nav-item nav-link" to="/login">Login</Link>
                             }
                         </div>
