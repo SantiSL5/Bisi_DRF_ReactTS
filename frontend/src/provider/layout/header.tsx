@@ -26,8 +26,8 @@ const Header = (props: HeaderProps) => {
                             {user
                                 ?
                                 <div className="nav-item navbar-collapse">
-                                    <a className="nav-item nav-link">{user.username}</a>
-                                    <a className="nav-item nav-link" onClick={logout}>Logout</a>
+                                    <button className="nav-item nav-link btn btn-link">{user.username}</button>
+                                    <button className="nav-item nav-link btn btn-link" onClick={logout}>Logout</button>
                                 </div>
                                 : <Link className="nav-item nav-link" to="/login">Login</Link>
                             }

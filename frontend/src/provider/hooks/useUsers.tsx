@@ -1,10 +1,10 @@
 import consume from '../router/consumer';
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { queryConsumer, userQueries, jwtQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
-import { saveUser } from '../actions';
-import { connect } from 'react-redux';
+// import { saveUser } from '../actions';
+// import { connect } from 'react-redux';
 
 export function useUsers() {
 
@@ -30,7 +30,7 @@ export function useUsers() {
                     setIsAdmin(true);
                 }
             }).catch((e: any) => {
-                if (e.response.status == 403) {
+                if (e.response.status === 403) {
                     toast.error("Your session has expired, logging out...", { theme: "dark" })
                     logout();
                 }

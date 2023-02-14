@@ -1,14 +1,5 @@
-import React, { useContext } from 'react'
 import { Navigate, Outlet } from "react-router-dom"
-import { toast } from 'react-toastify';
-import { queryConsumer, userQueries } from '../../../core/queries';
 import { useUsers } from "../../hooks/useUsers";
-import consume from '../consumer';
-import { useNavigate, useLocation } from 'react-router-dom'
-
-if (sessionStorage.getItem("path")) {
-    sessionStorage.removeItem("path")
-}
 
 export function NoAuthGuard() {
     const { user } = useUsers();
