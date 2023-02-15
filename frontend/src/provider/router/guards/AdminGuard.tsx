@@ -1,27 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { toast } from 'react-toastify';
-import { queryConsumer, userQueries } from '../../../core/queries';
+import Spinner from "../../components/spinner/spinner.component";
 import { useUsers } from "../../hooks/useUsers";
-import consume from '../consumer';
 
 function AdminGuard() {
-    const { isAdmin, setIsAdmin } = useUsers();
+    const { isAdmin, loading } = useUsers();
 
-    if (!isAdmin) {
-        consume(queryConsumer.apiUser, userQueries.getUser).then((res: any) => {
-            if (res.data.user.type === "admin") {
-                setIsAdmin(true)
-                return <Outlet />
-            } else {
-                throw new Error("");
-            }
-        }).catch((e: any) => {
-            toast.error("Nice try", { theme: "dark" })
-            return < Navigate to="/" />
-        })
+    if (!loading) {
+        return !isAdmin ? <Navigate to="/login" /> : <Outlet />;
     }
-
-    return isAdmin === true ? <Outlet /> : <></>
+    return <Spinner />;
 }
 
 export default AdminGuard;

@@ -3,31 +3,24 @@ import { useEffect, useState } from 'react'
 import { queryConsumer, userQueries, jwtQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
-// import { saveUser } from '../actions';
-// import { connect } from 'react-redux';
 
 export function useUsers() {
 
     const navigate = useNavigate();
     const [user, setUser]: any = useState(undefined);
     const [isAdmin, setIsAdmin]: any = useState(undefined);
-    // const [isAdmin, setIsAdmin]: any = useState(consume(queryConsumer.apiUser, userQueries.getUserType));
+    const [loading, setLoading]: any = useState(true);
     const [token, setToken]: any = useState(consume(queryConsumer.apiJwt, jwtQueries.getToken));
 
     useEffect(() => {
-        // console.log(consume(queryConsumer.apiJwt, jwtQueries.getToken));
-
-        // consume(queryConsumer.apiJwt, jwtQueries.getToken).then((res: any) => { })
-
-        // console.log(saveUser("actions"));
-
-        // saveUser("actions");
-
         if (token) {
             consume(queryConsumer.apiUser, userQueries.getUser).then((res: any) => {
                 setUser(res.data.user);
                 if (res.data.user.type === "admin") {
                     setIsAdmin(true);
+                    setLoading(false);
+                }else{
+                    setLoading(false);
                 }
             }).catch((e: any) => {
                 if (e.response.status === 403) {
@@ -35,6 +28,8 @@ export function useUsers() {
                     logout();
                 }
             })
+        } else {
+            setLoading(false);
         }
 
         // if (token) {
@@ -93,6 +88,6 @@ export function useUsers() {
 
     })
 
-    return { user, token, isAdmin, setIsAdmin, registerH, login, logout, refreshToken };
+    return { user, token, isAdmin, loading, setIsAdmin, registerH, login, logout, refreshToken };
 
 }
