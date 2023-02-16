@@ -21,7 +21,6 @@ const RegisterForm = ({ registerH }: any) => {
 
 
     const onSubmit = (data: IFormInputs) => {
-        console.log(data)
         registerH(data);
     };
 
