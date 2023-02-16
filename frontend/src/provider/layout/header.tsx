@@ -26,7 +26,19 @@ const Header = (props: HeaderProps) => {
                             {user
                                 ?
                                 <div className="nav-item navbar-collapse">
-                                    <button className="nav-item nav-link btn btn-link">{user.username}</button>
+                                    <div className="me-4 dropdown">
+                                        <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {user.balance <= 0
+                                                ? <span className="text-danger fw-bold">{user.balance} €</span>
+                                                : <span className="text-success fw-bold">{user.balance} €</span>
+                                            }
+                                        </button>
+                                        <ul className="dropdown-menu dropdown-menu-dark">
+                                        <li><Link className="dropdown-item" to="/profile">Add funds</Link></li>
+                                        </ul>
+                                    </div>
+                                    <Link to="/profile"><img src={user.img} alt="pfp" className="img-fluid" width="44" /></Link>
+                                    <Link className="nav-item nav-link btn btn-link" to="/profile">{user.username}</Link>
                                     <button className="nav-item nav-link btn btn-link" onClick={logout}>Logout</button>
                                 </div>
                                 : <Link className="nav-item nav-link" to="/login">Login</Link>

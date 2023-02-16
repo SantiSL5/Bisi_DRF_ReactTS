@@ -14,8 +14,9 @@ class UserManager(BaseUserManager):
             username=username,
         )
         user.type="client"
-        user.is_active= True
-        user.balance= 0
+        user.is_active=True
+        user.balance=0
+        user.img="https://static.productionready.io/images/smiley-cyrus.jpg"
         user.set_password(password)
         user.save()
         return user
@@ -36,7 +37,8 @@ class User(AbstractBaseUser, TimestampedModel):
     email = models.EmailField('email', unique=True)
     username = models.CharField('username', max_length=30, blank=True)
     is_active = models.BooleanField('active', default=True)
-    balance = models.IntegerField('balance', default=True)
+    balance = models.FloatField('balance', default=True)
+    img = models.CharField(max_length=255)
     type = models.CharField('type', max_length=10, blank=True)
 
     USERNAME_FIELD = 'email'

@@ -8,6 +8,7 @@ import AdminBikes from "../pages/Admin/bikes";
 import AdminStations from "../pages/Admin/stations";
 import AdminSlots from "../pages/Admin/slots";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 import AdminGuard from "./guards/AdminGuard";
 import { NoAuthGuard } from "./guards/AuthGuard";
 
@@ -28,6 +29,9 @@ const Router = () => {
                             <Route path="bikes/" element={<AdminBikes />} />
                         </Route>
                     </Route>
+                    {/* <Route element={<NoAuthGuard />}> */}
+                        <Route path="/profile/" element={<Profile />}></Route>
+                    {/* </Route> */}
                 </Routes>
             </Layout>
             <ToastContainer />

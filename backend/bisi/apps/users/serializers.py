@@ -20,7 +20,9 @@ class userSerializer(serializers.ModelSerializer):
             'user': {
                 'username': user.username,
                 'email': user.email,
-                'type': user.type
+                'type': user.type,
+                'balance': user.balance,
+                'img': user.img
             },
         }
 
