@@ -23,6 +23,12 @@ export function useSlots() {
         }).catch((e: any) => {
             if (e.response.data.non_field_errors) {
                 toast.error("There cannot be 2 slots with the same number in a station", { theme: "dark" })
+            } else if (e.response.data.bike) {
+                if (e.response.data.bike[0] === "slot with this bike already exists.") {
+                    toast.error("Bike with ID " + data.bike + " is already parked", { theme: "dark" })
+                } else {
+                    toast.error("Bike with ID " + data.bike + " does not exist", { theme: "dark" })
+                }
             } else {
                 toast.error("Station with ID " + data.station + " does not exist", { theme: "dark" })
             }
@@ -64,8 +70,14 @@ export function useSlots() {
         }).catch((e: any) => {
             if (e.response.data.non_field_errors) {
                 toast.error("There cannot be 2 slots with the same number in a station", { theme: "dark" })
+            } else if (e.response.data.bike) {
+                if (e.response.data.bike[0] === "slot with this bike already exists.") {
+                    toast.error("Bike with ID " + data.data.bike + " is already parked", { theme: "dark" })
+                } else {
+                    toast.error("Bike with ID " + data.data.bike + " does not exist", { theme: "dark" })
+                }
             } else {
-                toast.error("Station with ID " + data.station + " does not exist", { theme: "dark" })
+                toast.error("Station with ID " + data.data.station + " does not exist", { theme: "dark" })
             }
         })
     })

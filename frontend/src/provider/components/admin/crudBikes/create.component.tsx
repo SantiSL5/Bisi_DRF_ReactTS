@@ -2,12 +2,12 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from 'react-hook-form';
 
 interface IFormInputs {
-    number: number,
+    number: string,
     warning: boolean,
     disabled: boolean,
 }
 
-const CreateUpdate = ({ createBike, operation, updateData, updateBike }: any) => {
+const CreateUpdate = ({ createBike, operation, updateData, updateBike, changeForm }: any) => {
 
     const {
         register,
@@ -23,6 +23,13 @@ const CreateUpdate = ({ createBike, operation, updateData, updateBike }: any) =>
         setValue("warning", updateData.warning)
         setValue("disabled", updateData.disabled)
     }
+
+    if (operation === "create" && updateData !== undefined) {
+        setValue("number", "")
+        setValue("warning", false)
+        setValue("disabled", false)
+    }
+
 
     const onSubmit = (data: IFormInputs) => {
         operation === "create" ? createBike(data) : updateBike({ data: data, id: updateData.id });
@@ -69,7 +76,12 @@ const CreateUpdate = ({ createBike, operation, updateData, updateBike }: any) =>
 
                 {operation === "create"
                     ? <button type="submit" className="btn btn-success">Create</button>
-                    : <button type="submit" className="btn btn-info">Update</button>}
+                    : <div>
+                        <button type="submit" className="btn btn-info">Update</button>
+                        <button type="button" className="btn btn-success ms-3" onClick={
+                            () => changeForm(null, "create")
+                        }>Back to create</button>
+                    </div>}
             </form>
 
         </div>
