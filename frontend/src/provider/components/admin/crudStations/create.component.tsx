@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 interface IFormInputs {
     name: string,
-    numberSlots: string,
+    slots: string,
     warning: boolean,
     disabled: boolean,
 }
@@ -65,8 +65,8 @@ const CreateUpdate = ({ createStation, operation, updateData, updateStation, cha
                     if (operation === "create") {
                         return <div className="mb-2">
                             <label htmlFor="Slots" className="form-label text-white">Number of Slots:
-                                <input id="numberSlots" type="number" className="form-control mt-2"
-                                    {...register("numberSlots", {
+                                <input id="slots" type="number" className="form-control mt-2"
+                                    {...register("slots", {
                                         maxLength: {
                                             value: 2,
                                             message: "This input exceed maxLength."
@@ -75,7 +75,7 @@ const CreateUpdate = ({ createStation, operation, updateData, updateStation, cha
                                 />
                                 <ErrorMessage
                                     errors={errors}
-                                    name="numberSlots"
+                                    name="slots"
                                     render={({ messages }) => {
                                         console.log("messages", messages);
                                         return messages

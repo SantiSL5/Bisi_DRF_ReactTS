@@ -1,6 +1,7 @@
 
 const stationQueries: any = {
     getAllStations: "getAll",
+    getAllStationsWithSlots : "getAllWithSlots",
     createStation: "createOne",
     deleteStation: "deleteOne",
     deleteManyStations: "deleteMany",

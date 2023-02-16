@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './media/logo.svg';
 import './media/App.css';
 import Router from './router';
 

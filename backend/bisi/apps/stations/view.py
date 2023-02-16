@@ -18,6 +18,10 @@ class StationView(viewsets.GenericViewSet):
         serializer = StationSerializer.getAllStations(context)
         return Response(serializer,status=status.HTTP_200_OK)
     
+    def getAllStationsWithSlots(self,request):
+        serializer = StationSerializer.getAllStationsWithSlots(context)
+        return Response(serializer,status=status.HTTP_200_OK)
+    
     def createStation(self, request):
 
         serializer_context = {
@@ -36,6 +40,7 @@ class StationView(viewsets.GenericViewSet):
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         if request.data['slots']: 
             if isinstance(request.data['slots'], int):
                 for slot in range(1,request.data['slots'] + 1):

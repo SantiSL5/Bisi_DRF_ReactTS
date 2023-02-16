@@ -6,12 +6,19 @@ import { toast } from 'react-toastify'
 export function useStations() {
 
     const [stations, setStations]: any = useState(undefined);
+    const [stationsWithSlots, setStationsWithSlots]: any = useState(undefined);
 
     useEffect(() => {
         consume(queryConsumer.apiStation, stationQueries.getAllStations).then((res: any) => {
             setStations(res.data);
         })
     }, [])
+
+    const getStationsWithSlots = (() => {
+        consume(queryConsumer.apiStation, stationQueries.getAllStationsWithSlots).then((res: any) => {
+            setStationsWithSlots(res.data);
+        })
+    })
 
     const createStation = ((data: any) => {
         if (data.slots !== "") {
@@ -63,6 +70,6 @@ export function useStations() {
         })
     })
 
-    return { stations, createStation, deleteStation, deleteManyStations, updateStation };
+    return { stations, stationsWithSlots, getStationsWithSlots, createStation, deleteStation, deleteManyStations, updateStation };
 
 }

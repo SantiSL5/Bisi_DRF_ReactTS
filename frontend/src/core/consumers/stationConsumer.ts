@@ -9,6 +9,12 @@ const stationConsumer: any = {
             url: secret.DJANGO_APP_URL + "/station/",
         })
     },
+    getAllWithSlots: () => {
+        return Api({
+            method: "get",
+            url: secret.DJANGO_APP_URL + "/station/slots",
+        })
+    },
     createOne: (data: any) => {
         return Api({
             method: "post",
