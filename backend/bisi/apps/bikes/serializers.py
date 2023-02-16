@@ -11,16 +11,12 @@ class BikeSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'number',
-            'warning', 
-            'disabled'
         )
 
     def to_bike(instance):
         return {
             'id': instance.id,
             'number' : instance.number,
-            'warning' : instance.warning,
-            'disabled' : instance.disabled
         }
 
     def getAllBikes(context):

@@ -13,8 +13,6 @@ class Bike(TimestampedModel):
     #     ]
     # )
     # slot = models.ForeignKey('slots.Slot', on_delete=models.DO_NOTHING, related_name='slots', null=True)
-    warning = models.BooleanField(default=False)
-    disabled = models.BooleanField(default=False)
 
     class Meta:
         # Gives the proper plural name for admin

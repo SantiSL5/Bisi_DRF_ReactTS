@@ -23,8 +23,6 @@ class BikeView(viewsets.GenericViewSet):
 
         serializer_context = {
             'number': request.data['number'],
-            'warning': request.data['warning'],
-            'disabled': request.data['disabled'],
             'request': request
         }
 

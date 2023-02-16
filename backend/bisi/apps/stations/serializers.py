@@ -41,7 +41,7 @@ class StationSerializer(serializers.ModelSerializer):
         return {
             'id': instance.id,
             'number' : instance.number,
-            'bike': instance.bike_id if instance.bike_id == None else BikeSerializer.to_bike(instance.bike),
+            'bike': instance.bike_id,
             'warning' : instance.warning,
             'disabled' : instance.disabled
         }
