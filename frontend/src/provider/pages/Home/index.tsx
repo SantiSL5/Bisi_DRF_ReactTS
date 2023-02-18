@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStations } from "../../hooks/useStations";
 import ListStations from "../../components/rent/listStations.component";
+import RentModal from "../../components/rent/modal.component";
 import Spinner from "../../components/spinner/spinner.component";
-import { useSlots } from "../../hooks/useSlots";
-
 
 const Home = () => {
     const { stationsWithSlots, getStationsWithSlots } = useStations();
 
     if (!stationsWithSlots) getStationsWithSlots();
+    const [rentInfo, setRentInfo]: any = useState();
+
+    const getModalInfo = () => {
+        setRentInfo(undefined);
+    }
 
     return (
         <div className="container-fluid row">
             <div className="">
-                {stationsWithSlots ? <ListStations stations={stationsWithSlots} /> : <Spinner />}
+                {stationsWithSlots ? <ListStations stations={stationsWithSlots} getModalInfo={getModalInfo} /> : <Spinner />}
             </div>
+            <RentModal rentInfo={rentInfo} />
         </div >
     );
 }
