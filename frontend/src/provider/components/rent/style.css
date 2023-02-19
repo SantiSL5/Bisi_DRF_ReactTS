@@ -1,3 +1,152 @@
+@media (min-width: 768px) {
+
+    .bike0 {
+        grid-area: bike0;
+        width: 100% !important;
+    }
+
+    .bike1 {
+        grid-area: bike1;
+        width: 100% !important;
+    }
+
+    .bike2 {
+        grid-area: bike2;
+        width: 100% !important;
+    }
+
+    .bike3 {
+        grid-area: bike3;
+        width: 100% !important;
+    }
+
+    .bike4 {
+        grid-area: bike4;
+        width: 100% !important;
+    }
+
+    .bike5 {
+        grid-area: bike5;
+        width: 100% !important;
+    }
+
+    .bike6 {
+        grid-area: bike6;
+        width: 100% !important;
+    }
+
+    .bike7 {
+        grid-area: bike7;
+        width: 100% !important;
+    }
+
+    .bike8 {
+        grid-area: bike8;
+        width: 100% !important;
+    }
+
+    .bike9 {
+        grid-area: bike9;
+        width: 100% !important;
+    }
+
+    .bike10 {
+        grid-area: bike10;
+        width: 100% !important;
+    }
+
+    .bike11 {
+        grid-area: bike11;
+        width: 100% !important;
+    }
+
+    .bike12 {
+        grid-area: bike12;
+        width: 100% !important;
+    }
+
+    .bike13 {
+        grid-area: bike13;
+        width: 100% !important;
+    }
+
+    .bike14 {
+        grid-area: bike14;
+        width: 100% !important;
+    }
+
+    .bike15 {
+        grid-area: bike15;
+        width: 100% !important;
+    }
+
+    .bike16 {
+        grid-area: bike16;
+        width: 100% !important;
+    }
+
+    .bike17 {
+        grid-area: bike17;
+        width: 100% !important;
+    }
+
+    .bike18 {
+        grid-area: bike18;
+        width: 100% !important;
+    }
+
+    .bike19 {
+        grid-area: bike19;
+        width: 100% !important;
+    }
+
+    .bike20 {
+        grid-area: bike20;
+        width: 100% !important;
+    }
+
+    .bike21 {
+        grid-area: bike21;
+        width: 100% !important;
+    }
+
+    .bike22 {
+        grid-area: bike22;
+        width: 100% !important;
+    }
+
+    .bike23 {
+        grid-area: bike23;
+        width: 100% !important;
+    }
+
+    .bike-container {
+        margin: auto;
+        display: grid !important;
+        grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+        grid-template-areas:
+            "bike0 bike1 bike2 bike3 bike4 bike5 bike6 bike7"
+            "bike8 bike9 bike10 bike11 bike12 bike13 bike14 bike15"
+            "bike16 bike17 bike18 bike19 bike20 bike21 bike22 bike23" !important
+    }
+}
+
+@media (min-width: 992px) {
+    .bike-button {
+        margin: -8px !important;
+    }
+
+    .bike-container {
+        margin: auto;
+        display: grid !important;
+        grid-template-columns: 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33%;
+        grid-template-areas:
+            "bike0 bike1 bike2 bike3 bike4 bike5 bike6 bike7 bike8 bike9 bike10 bike11"
+            "bike12 bike13 bike14 bike15 bike16 bike17 bike18 bike19 bike20 bike21 bike22 bike23" !important
+    }
+
+}
+
 .bike-button {
     margin: -5px;
 }
