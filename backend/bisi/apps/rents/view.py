@@ -8,7 +8,7 @@ from .models import Rent
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class RentView(viewsets.GenericViewSet):
-    permission_classes = (AllowAny, IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
     serializer_class = RentSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
@@ -18,7 +18,6 @@ class RentView(viewsets.GenericViewSet):
         return Response(serializer,status=status.HTTP_200_OK)
     
     def createRent(self, request):
-        permission_classes = [IsAuthenticated]
         bike=RentSerializer.Slot_bike(request.data)
         user=request.user.id
         if bike == None:
@@ -47,14 +46,15 @@ class RentView(viewsets.GenericViewSet):
         return Response(serialized_data, status=status.HTTP_200_OK)
     
     def updateRent(self, request, id):
-        slot = get_object_or_404(Rent.objects.all(), id=id)
+
+        rent = get_object_or_404(Rent.objects.all(), id=id)
         data = request.data
                 
         serializer = RentSerializer(
-            instance=slot, data=data, partial=True)
+            instance=rent, data=data, partial=True)
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
-        return Response(RentSerializer.to_slot(slot))
+        return Response(RentSerializer.to_rent(rent))
     
     def deleteRent(self, request, id):
         slot = get_object_or_404(Rent.objects.all(),id=id)
@@ -74,5 +74,12 @@ class RentView(viewsets.GenericViewSet):
             slots.delete()
             return Response({'data': 'Rents deleted'})
         return Response({'data': 'No slots provided'})
+    
+class RentUserView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = RentSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
 
-
+    def getCurrentRent(self,request):
+        serializer = RentSerializer.getCurrentRent(request.user.id)
+        return Response(serializer,status=status.HTTP_200_OK)

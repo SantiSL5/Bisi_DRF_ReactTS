@@ -6,8 +6,9 @@ class Rent(TimestampedModel):
     bike = models.ForeignKey('bikes.Bike', on_delete=models.CASCADE, related_name='bike_rent')
     starting_slot = models.ForeignKey('slots.Slot', on_delete=models.CASCADE, related_name='s_slot')
     ending_slot = models.ForeignKey('slots.Slot', on_delete=models.CASCADE, related_name='e_slot', null=True)
-    duration = models.DurationField(null=True)
+    duration = models.IntegerField(null=True, default=0)
     active = models.BooleanField(default=True)
+    cost = models.FloatField(null=True, default=0)
     returned_at = models.DateTimeField(null=True)
 
     class Meta:
