@@ -20,6 +20,8 @@ class RentView(viewsets.GenericViewSet):
     def createRent(self, request):
         bike=RentSerializer.Slot_bike(request.data)
         user=request.user.id
+        if RentSerializer.getCurrentRent(user) != False:
+            return Response({'data': "You already have a bike"})
         if bike == None:
             return Response({'data': "There isn't a bike here"})
         serializer_context = {
@@ -29,13 +31,11 @@ class RentView(viewsets.GenericViewSet):
             'active': True,
             'request': request
         }
-        print(serializer_context['active'])
 
         serializer = self.serializer_class(
             data = serializer_context,
             context = serializer_context
         )
-        print(serializer)
 
         serializer.is_valid(raise_exception=True)
         serializer.save()

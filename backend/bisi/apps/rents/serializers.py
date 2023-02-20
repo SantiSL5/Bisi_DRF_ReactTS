@@ -65,10 +65,11 @@ class RentSerializer(serializers.ModelSerializer):
 
     def getCurrentRent(user):
 
-        rent = Rent.objects.filter(user_id=user, active=True)[0]
-        duration,cost=RentSerializer.updateRentValues(rent)
-        if rent == None:
+        rent = Rent.objects.filter(user_id=user, active=True)
+        if len(rent)==0:
             return False
+        rent = rent[0]
+        duration,cost=RentSerializer.updateRentValues(rent)
         cursor = connection.cursor()
         cursor.execute('''UPDATE bisi.rents_rent SET duration = %s,cost = %s WHERE id = %s''',[duration, cost, rent.id])
         transaction.commit()
