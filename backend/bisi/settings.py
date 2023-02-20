@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     'bisi.apps.bikes',
     'bisi.apps.stations',
     'bisi.apps.slots',
+    'bisi.apps.rents',
 ]
 
 MIDDLEWARE = [

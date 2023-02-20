@@ -1,3 +1,4 @@
+from rest_framework.generics import get_object_or_404
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
@@ -47,6 +48,13 @@ class SlotSerializer(serializers.ModelSerializer):
             serialized_slots.append(serialized_slot)
 
         return serialized_slots
+    
+    def getSlotById(id):
+
+        slot = get_object_or_404(Slot.objects.all(), id=id)
+        serialized_slot = SlotSerializer.to_slot(slot)
+        
+        return serialized_slot
     
     def getSlotsDelete(context):
 
