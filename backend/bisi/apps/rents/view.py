@@ -20,6 +20,9 @@ class RentView(viewsets.GenericViewSet):
     def createRent(self, request):
         bike=RentSerializer.Slot_bike(request.data)
         user=request.user.id
+        check_user=Rent.objects.raw('''SELECT * FROM bisi.users_user WHERE id = %s''',[user])
+        if check_user[0].balance<0:
+            return Response({'data': "Not enough founds"})
         if RentSerializer.getCurrentRent(user) != False:
             return Response({'data': "You already have a bike"})
         if bike == None:
@@ -81,5 +84,12 @@ class RentUserView(viewsets.GenericViewSet):
     http_method_names = ['get', 'post', 'put', 'delete']
 
     def getCurrentRent(self,request):
-        serializer = RentSerializer.getCurrentRent(request.user.id)
+        rent = RentSerializer.getCurrentRent(request.user.id)
+        if rent == False:
+            return Response(rent,status=status.HTTP_200_OK)
+        serializer = RentSerializer.to_rent(rent)
+        return Response(serializer,status=status.HTTP_200_OK)
+    
+    def returnBike(self,request):
+        serializer = RentSerializer.returnBike(request.user.id, request.data['ending_slot'])
         return Response(serializer,status=status.HTTP_200_OK)

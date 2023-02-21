@@ -1,3 +1,4 @@
+from rest_framework.generics import get_object_or_404
 from dataclasses import fields
 from datetime import datetime, timezone
 import math
@@ -30,7 +31,7 @@ class RentSerializer(serializers.ModelSerializer):
             'user' : instance.user.id,
             'bike' : BikeSerializer.to_bike(instance.bike),
             'starting_slot': instance.starting_slot.id,
-            'ending_slot' : None if instance.ending_slot == None else instance.ending_slot ,
+            'ending_slot' : None if instance.ending_slot == None else instance.ending_slot.id ,
             'active' : instance.active,
             'duration' : instance.duration,
             'cost': instance.cost,
@@ -52,6 +53,9 @@ class RentSerializer(serializers.ModelSerializer):
     
     def Slot_bike(instance):
         starting_slot=int(instance['starting_slot'])
+        check_slot=Rent.objects.raw('''SELECT * FROM bisi.slots_slot WHERE id = %s''',[starting_slot])
+        if len(check_slot) == 0:
+            return { "data": "Slot not found" }
         slot = Rent.objects.raw('''SELECT * FROM bisi.slots_slot WHERE bike_id IS NOT NULL AND id = %s''',[starting_slot])
         if len(slot) == 0:
             return None
@@ -69,21 +73,38 @@ class RentSerializer(serializers.ModelSerializer):
         if len(rent)==0:
             return False
         rent = rent[0]
-        duration,cost=RentSerializer.updateRentValues(rent)
+        duration,cost,time=RentSerializer.updateRentValues(rent)
         cursor = connection.cursor()
         cursor.execute('''UPDATE bisi.rents_rent SET duration = %s,cost = %s WHERE id = %s''',[duration, cost, rent.id])
         transaction.commit()
         rent = Rent.objects.filter(user_id=user, active=True)[0]
-        serialized_rent=RentSerializer.to_rent(rent)
 
-        return serialized_rent
+        return rent
     
+    def returnBike(user,return_slot):
+        rent = RentSerializer.getCurrentRent(user)
+        check_slot=Rent.objects.raw('''SELECT * FROM bisi.slots_slot WHERE id = %s''',[return_slot])
+        if rent == False:
+            return {'data': "You don't have a bike rented"}
+        if len(check_slot) == 0:
+            return {'data': "Slot not found"}
+        slot = Rent.objects.raw('''SELECT * FROM bisi.slots_slot WHERE bike_id IS NULL AND id = %s''',[return_slot])
+        if len(slot) == 0:
+            return {'data': "This slot is already occupied"}
+        duration,cost,return_time=RentSerializer.updateRentValues(rent)
+        cursor = connection.cursor()
+        cursor.execute('''UPDATE bisi.rents_rent SET duration = %s, cost = %s, returned_at = %s, active = %s, ending_slot_id = %s WHERE id = %s''',[duration, cost, return_time, False, return_slot, rent.id])
+        cursor.execute('''UPDATE bisi.slots_slot SET bike_id = %s WHERE id = %s''',[rent.bike.id,return_slot])
+        cursor.execute('''UPDATE bisi.users_user SET balance = balance - %s WHERE id = %s''',[cost, user])
+        transaction.commit()
+        return {'data': "Bike returned"}
+
     def updateRentValues(rent):
         current_time=datetime.now(timezone.utc)
         duration=current_time-rent.created_at
         duration_m=math.trunc(duration.total_seconds() / 60)
         cost=math.trunc(math.ceil(duration_m/30))*0.5
-        return duration_m,cost
+        return duration_m,cost,current_time
 
 
     def getAllRents(context):
