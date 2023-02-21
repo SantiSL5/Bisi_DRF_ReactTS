@@ -1,6 +1,7 @@
 import "./style.css"
 
 const ListStations = ({ stations, getModalInfo }: any) => {
+
     return (
         <div className="container-lg mt-3">
             <div className="text-white">

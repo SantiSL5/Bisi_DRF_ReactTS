@@ -1,8 +1,8 @@
 import { Link, useNavigate, } from "react-router-dom";
 
-const RentModal = ({ user, rentInfo, selectedSlot, rentBike }: any) => {
+const RentModal = ({ user, rentInfo, selectedSlot, rentBike, returnBike }: any) => {
     const navigate = useNavigate();
-    console.log(selectedSlot)
+
     return (
         <div className="container mt-3">
             <div className="modal fade" id="rentModal" aria-labelledby="rentModalLabel" aria-hidden="true">
@@ -33,10 +33,10 @@ const RentModal = ({ user, rentInfo, selectedSlot, rentBike }: any) => {
                                                     ? user.balance <= 0
                                                         ? <span className="text-danger">Insufficient funds <button className="btn btn-info" data-bs-dismiss="modal" onClick={() => navigate("/profile")}>Add funds</button></span>
                                                         : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Rent bike</button>
-                                                    : rentInfo.cost != 0
+                                                    : rentInfo.active
                                                         ? selectedSlot.bike
                                                             ? <button className="btn btn-success" disabled>Slot occupied</button>
-                                                            : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Return bike</button>
+                                                            : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => returnBike({ "ending_slot": selectedSlot.id })}>Return bike</button>
                                                         : selectedSlot.bike
                                                             ? <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Rent bike</button>
                                                             : <button className="btn btn-success" disabled>Empty slot</button>

@@ -4,7 +4,8 @@ const rentQueries: any = {
     getUserRent: "getUserRent",
     createRent: "createOne",
     updateRent: "updateOne",
-    rentInfo: "rentInfo"
+    rentInfo: "rentInfo",
+    returnBike: "returnBike",
 }
 
 export default rentQueries;

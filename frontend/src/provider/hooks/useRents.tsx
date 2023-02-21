@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import consume from '../router/consumer';
 import { queryConsumer, rentQueries } from "../../core/queries";
 import { toast } from 'react-toastify'
-
+import { useStations } from './useStations';
 export function useRents() {
 
     const [rents, setRents]: any = useState(undefined);
     const [lastRent, setLastRent]: any = useState(undefined);
+    const { getStationsWithSlots } = useStations();
 
     useEffect(() => {
         // consume(queryConsumer.apiRent, rentQueries.getAllRents).then((res: any) => {
@@ -16,12 +17,17 @@ export function useRents() {
 
     const rentBike = ((data: any) => {
         consume(queryConsumer.apiRent, rentQueries.rentBike, data).then((res: any) => {
-            if (res.data.data) {
-                toast.error(res.data.data, { theme: "dark" })
-            }
-            // const aux = [...rents, res.data]
-            // toast.success("Created successfully", { theme: "dark" })
-            // setRents(aux)
+            toast.error(res.data.data, { theme: "dark" })
+            window.location.reload();
+        }).catch((e: any) => {
+            console.log(e);
+        })
+    })
+
+    const returnBike = ((data: any) => {
+        consume(queryConsumer.apiRent, rentQueries.returnBike, data).then((res: any) => {
+            toast.success(res.data.data, { theme: "dark" })
+            window.location.reload();
         }).catch((e: any) => {
             console.log(e);
         })
@@ -90,6 +96,6 @@ export function useRents() {
         })
     })
 
-    return { rents, lastRent, createRent, deleteRent, deleteManyRents, updateRent, rentBike, getRentInfo };
+    return { rents, lastRent, createRent, deleteRent, deleteManyRents, updateRent, rentBike, returnBike, getRentInfo };
 
 }

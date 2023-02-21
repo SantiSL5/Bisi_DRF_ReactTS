@@ -8,7 +8,7 @@ import { useRents } from "../../hooks/useRents";
 
 const Home = () => {
     const { stationsWithSlots, getStationsWithSlots } = useStations();
-    const { lastRent, rentBike, getRentInfo } = useRents();
+    const { lastRent, rentBike, returnBike, getRentInfo } = useRents();
     const { user } = useUsers();
 
     if (!stationsWithSlots) getStationsWithSlots();
@@ -26,7 +26,7 @@ const Home = () => {
             <div className="">
                 {stationsWithSlots ? <ListStations stations={stationsWithSlots} getModalInfo={getModalInfo} /> : <Spinner />}
             </div>
-            <RentModal user={user} rentInfo={lastRent} selectedSlot={selectedSlot} rentBike={rentBike} />
+            <RentModal user={user} rentInfo={lastRent} selectedSlot={selectedSlot} rentBike={rentBike} returnBike={returnBike} />
         </div >
     );
 }

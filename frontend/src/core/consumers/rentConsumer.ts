@@ -10,6 +10,13 @@ const rentConsumer: any = {
             data: data
         })
     },
+    returnBike: (data: any) => {
+        return Api({
+            method: "put",
+            url: secret.DJANGO_APP_URL + "/rent/user",
+            data: data
+        })
+    },
     rentInfo: () => {
         return Api({
             method: "get",
