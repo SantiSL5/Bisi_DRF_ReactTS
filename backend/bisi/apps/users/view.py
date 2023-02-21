@@ -60,6 +60,16 @@ class UserAuthenticatedView(viewsets.GenericViewSet):
         serializer = userSerializer.getUser(context=serializer_context)
         return Response(serializer)
 
+    def addFunds(self, request):
+                
+        user = request.user
+        serializer_context = {
+            'user': user,
+            'funds': request.data['funds']
+        }
+        serializer = userSerializer.addFunds(context=serializer_context)
+        return Response(serializer)
+
     # def refreshToken(self, request):
     #     username = request.user
 

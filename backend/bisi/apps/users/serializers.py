@@ -1,6 +1,7 @@
 from rest_framework import serializers, authentication, exceptions
 from django.core.exceptions import PermissionDenied
 from .models import User
+from django.db import connection, transaction
 
 
 class userSerializer(serializers.ModelSerializer):
@@ -12,7 +13,7 @@ class userSerializer(serializers.ModelSerializer):
         user = context['user']
         if user is None:
             raise serializers.ValidationError(
-                'username is not find'
+                'Username is not found'
             )
         user = User.objects.get(email=user.email)
 
@@ -25,6 +26,21 @@ class userSerializer(serializers.ModelSerializer):
                 'img': user.img
             },
         }
+    
+    def addFunds(context):
+        user = context['user']
+        funds = context['funds']
+        if user is None:
+            raise serializers.ValidationError(
+                'Username is not found'
+            )
+        user = User.objects.get(email=user.email)
+
+        cursor = connection.cursor()
+        cursor.execute('''UPDATE bisi.users_user SET balance = balance + %s WHERE id = %s''',[funds, user.id])
+        transaction.commit()
+        return {'data': 'Funds added'}
+
 
     def register(context):
 

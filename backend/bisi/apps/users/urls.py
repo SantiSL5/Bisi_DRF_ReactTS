@@ -7,4 +7,5 @@ urlpatterns = [
     
     # path('refreshToken/', UserAuthenticatedView.as_view({'post': 'refreshToken'})),
     path('user', UserAuthenticatedView.as_view({'get': 'getUser'})),
+    path('addFunds', UserAuthenticatedView.as_view({'put': 'addFunds'})),
 ]
