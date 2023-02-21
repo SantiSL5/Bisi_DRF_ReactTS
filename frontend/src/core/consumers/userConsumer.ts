@@ -17,6 +17,13 @@ const userConsumer: any = {
             data: data,
         })
     },
+    addFunds: (data: any) => {
+        return Api({
+            method: "put",
+            url: secrets.DJANGO_APP_URL + "/user/addFunds",
+            data: data,
+        })
+    },
     getUser: () => {
         return Api({
             method: "get",

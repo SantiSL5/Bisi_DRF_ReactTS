@@ -19,7 +19,7 @@ export function useUsers() {
                 if (res.data.user.type === "admin") {
                     setIsAdmin(true);
                     setLoading(false);
-                }else{
+                } else {
                     setLoading(false);
                 }
             }).catch((e: any) => {
@@ -76,6 +76,16 @@ export function useUsers() {
         })
     })
 
+    const addFunds = ((data: any) => {
+        consume(queryConsumer.apiUser, userQueries.addFunds, data).then((res: any) => {
+            console.log();
+            window.location.reload();
+        }).catch(() => {
+            toast.error("Something went wrong", { theme: "dark" })
+        })
+    })
+
+
     const logout = (() => {
         setUser(null);
         setToken(null);
@@ -88,6 +98,6 @@ export function useUsers() {
 
     })
 
-    return { user, token, isAdmin, loading, setIsAdmin, registerH, login, logout, refreshToken };
+    return { user, token, isAdmin, loading, setIsAdmin, registerH, login, logout, refreshToken, addFunds };
 
 }

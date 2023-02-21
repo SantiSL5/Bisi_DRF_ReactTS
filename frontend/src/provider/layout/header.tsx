@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./style.css"
 import { useUsers } from "../hooks/useUsers";
+import { useRents } from "../hooks/useRents";
 
 interface HeaderProps {
     title: string,
@@ -8,7 +9,10 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     const { user, isAdmin, logout } = useUsers();
-    
+    const { lastRent, getRentInfo } = useRents();
+
+    if (!lastRent && user) getRentInfo();
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,6 +30,12 @@ const Header = (props: HeaderProps) => {
                             {user
                                 ?
                                 <div className="nav-item navbar-collapse">
+
+                                    {lastRent
+                                        ? <div><span className="text-white me-3">{lastRent.duration} mins</span><img src={`/assets/green_bike.png`} alt="unavailable" className="img-fluid me-4" width="30px" /></div>
+                                        : <img src={`/assets/gray_bike.png`} alt="unavailable" className="img-fluid me-4" width="30px" />
+                                    }
+
                                     <div className="me-4 dropdown">
                                         <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             {user.balance <= 0
@@ -34,7 +44,7 @@ const Header = (props: HeaderProps) => {
                                             }
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark">
-                                        <li><Link className="dropdown-item" to="/profile">Add funds</Link></li>
+                                            <li><Link className="dropdown-item" to="/profile">Add funds</Link></li>
                                         </ul>
                                     </div>
                                     <Link to="/profile"><img src={user.img} alt="pfp" className="img-fluid" width="44" /></Link>

@@ -6,11 +6,11 @@ import { useUsers } from "../../hooks/useUsers";
 
 
 const Profile = () => {
-    const { user } = useUsers();
+    const { user, addFunds } = useUsers();
 
     return (
         <div className="adminView container">
-            {user ? <ProfileComponent user={user} /> : <Spinner />}
+            {user ? <ProfileComponent user={user} addFunds={addFunds} /> : <Spinner />}
         </div>
     );
 }

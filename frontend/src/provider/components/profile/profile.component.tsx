@@ -1,4 +1,4 @@
-const ProfileComponent = ({ user }: any) => {
+const ProfileComponent = ({ user, addFunds }: any) => {
     return (
         <div>
             <img src={user.img} alt="" />
@@ -8,6 +8,8 @@ const ProfileComponent = ({ user }: any) => {
                 ? <span className="text-danger fw-bold">{user.balance} €</span>
                 : <span className="text-success fw-bold">{user.balance} €</span>
             }</p>
+            <button type="button" className="btn btn-success me-2" onClick={() => addFunds({ funds: 5 })}>+5 €</button>
+            <button type="button" className="btn btn-success" onClick={() => addFunds({ funds: 10 })}>+10 €</button>
         </div>
     );
 }
