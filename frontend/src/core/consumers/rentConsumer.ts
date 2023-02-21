@@ -3,6 +3,19 @@ import secret from "../../secret";
 
 const rentConsumer: any = {
 
+    rentBike: (data: any) => {
+        return Api({
+            method: "post",
+            url: secret.DJANGO_APP_URL + "/rent/",
+            data: data
+        })
+    },
+    rentInfo: () => {
+        return Api({
+            method: "get",
+            url: secret.DJANGO_APP_URL + "/rent/user",
+        })
+    },
     getUserRent: (data: any) => {
         return Api({
             method: "get",

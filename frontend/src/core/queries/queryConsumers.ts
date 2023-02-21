@@ -6,6 +6,7 @@ const queryConsumer: any = {
     apiSlot: "ApiSlot",
     apiStation: "ApiStation",
     apiJwt: "ApiJwt",
+    apiRent: "ApiRent",
 }
 
 export default queryConsumer;

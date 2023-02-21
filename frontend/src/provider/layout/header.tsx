@@ -29,8 +29,8 @@ const Header = (props: HeaderProps) => {
                                     <div className="me-4 dropdown">
                                         <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             {user.balance <= 0
-                                                ? <span className="text-danger fw-bold">{user.balance} €</span>
-                                                : <span className="text-success fw-bold">{user.balance} €</span>
+                                                ? <span className="text-danger fw-bold">{user.balance.toFixed(2)} €</span>
+                                                : <span className="text-success fw-bold">{user.balance.toFixed(2)} €</span>
                                             }
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark">

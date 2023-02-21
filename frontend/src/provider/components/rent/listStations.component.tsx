@@ -20,7 +20,9 @@ const ListStations = ({ stations, getModalInfo }: any) => {
                                                 <button className="btn btn-dark d-flex flex-column justify-content-center align-items-center bike-button" data-bs-toggle="modal" data-bs-target="#rentModal" onClick={() => getModalInfo(slot)}>
                                                     {slot.warning || slot.disabled ? slot.disabled
                                                         ? <img src={`/assets/red_bike.png`} alt="unavailable" className="img-fluid bike-image" />
-                                                        : <img src={`/assets/yellow_bike.png`} alt="might be unavailable" className="img-fluid bike-image" />
+                                                        : slot.bike
+                                                            ? <img src={`/assets/yellow_bike.png`} alt="might be unavailable" className="img-fluid bike-image" />
+                                                            : <img src={`/assets/gray_bike.png`} alt="available" className="img-fluid bike-image" />
                                                         : slot.bike
                                                             ? <img src={`/assets/green_bike.png`} alt="available" className="img-fluid bike-image" />
                                                             : <img src={`/assets/gray_bike.png`} alt="available" className="img-fluid bike-image" />

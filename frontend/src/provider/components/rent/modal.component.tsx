@@ -1,8 +1,8 @@
-import Spinner from "../spinner/spinner.component";
+import { Link, useNavigate, } from "react-router-dom";
 
-const RentModal = ({ rentInfo }: any) => {
-    console.log(rentInfo);
-
+const RentModal = ({ user, rentInfo, selectedSlot, rentBike }: any) => {
+    const navigate = useNavigate();
+    console.log(selectedSlot)
     return (
         <div className="container mt-3">
             <div className="modal fade" id="rentModal" aria-labelledby="rentModalLabel" aria-hidden="true">
@@ -12,19 +12,44 @@ const RentModal = ({ rentInfo }: any) => {
                             <h1 className="modal-title fs-5" id="rentModalLabel">Rent info</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        {
-                            rentInfo ?
-                                <div className="modal-body">
-                                    ...
-                                </div>
-                                :
-                                <div className="modal-body">
-                                    Loading...
-                                </div>
-                        }
+                        <div className="modal-body">
+                            {
+                                rentInfo ?
+                                    selectedSlot.disabled
+                                        ? <>Slot disabled because: </>
+                                        : <></>
+                                    :
+                                    <>Loading...</>
+                            }
+                        </div>
                         <div className="modal-footer">
+                            {
+                                selectedSlot
+                                    ? selectedSlot.disabled
+                                        ? <button type="button" className="btn btn-danger" disabled>Disabled slot</button>
+                                        : user
+                                            ? rentInfo
+                                                ? rentInfo.returned_at
+                                                    ? user.balance <= 0
+                                                        ? <span className="text-danger">Insufficient funds <button className="btn btn-info" data-bs-dismiss="modal" onClick={() => navigate("/profile")}>Add funds</button></span>
+                                                        : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Rent bike</button>
+                                                    : rentInfo.cost != 0
+                                                        ? selectedSlot.bike
+                                                            ? <button className="btn btn-success" disabled>Slot occupied</button>
+                                                            : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Return bike</button>
+                                                        : selectedSlot.bike
+                                                            ? <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Rent bike</button>
+                                                            : <button className="btn btn-success" disabled>Empty slot</button>
+                                                : selectedSlot.bike
+                                                    ? user.balance <= 0
+                                                        ? <span className="text-danger">Insufficient funds <button className="btn btn-info" data-bs-dismiss="modal" onClick={() => navigate("/profile")}>Add funds</button></span>
+                                                        : <button className="btn btn-success" data-bs-dismiss="modal" onClick={() => rentBike({ "starting_slot": selectedSlot.id })}>Rent bike</button>
+                                                    : <button className="btn btn-success" disabled>Empty slot</button>
+
+                                            : <button className="btn btn-info" data-bs-dismiss="modal" onClick={() => navigate("/login")}>Login to be able to rent a bike</button> // Con un elemento de tipo link no funciona porque el modal se queda abierto
+                                    : <></>
+                            }
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
