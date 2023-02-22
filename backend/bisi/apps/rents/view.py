@@ -92,5 +92,5 @@ class RentUserView(viewsets.GenericViewSet):
         return Response(serialized_data, status=status.HTTP_200_OK)
     
     def returnBike(self,request):
-        serializer = RentSerializer.returnBike(request.user, request.data['ending_slot'])
+        serializer = RentSerializer.returnBike(request.user.id, request.data['ending_slot'])
         return Response(serializer,status=status.HTTP_200_OK)
