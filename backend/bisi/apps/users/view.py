@@ -1,7 +1,9 @@
 from rest_framework.generics import get_object_or_404
+from django.template import context
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.exceptions import NotFound
+from rest_framework import status
 from .models import User
 from .serializers import userSerializer
 from rest_framework.permissions import (
@@ -50,6 +52,7 @@ class UserView(viewsets.GenericViewSet):
 
 class UserAuthenticatedView(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
+    serializer_class = userSerializer
 
     def getUser(self, request):
                 
@@ -79,3 +82,63 @@ class UserAuthenticatedView(viewsets.GenericViewSet):
 
     #     serializer = userSerializer.refreshToken(serializer_context)
     #     return Response(serializer)
+    
+    def getAllUsers(self,request):
+        serializer = userSerializer.getAllUsers(context)
+        return Response(serializer,status=status.HTTP_200_OK)
+
+    def createUser(self, request):
+
+        user = User.objects.create_user(
+            email=request.data['email'],
+            username=request.data['username'], 
+            password=request.data['password'],
+            balance=request.data['balance'],
+            img=request.data['img'],
+        )
+        
+        serialized_data = {
+            'id': user.id,
+            'email': user.email,
+            'username': user.username, 
+            'balance': user.balance,
+            'img': user.img,
+            'type': user.type,
+        }
+
+        return Response(serialized_data, status=status.HTTP_200_OK)
+
+    def updateUser(self, request, id):
+                
+        user = get_object_or_404(User.objects.all(), id=id)
+        data = request.data
+        
+        if not (data.get("password") is None):
+            user.set_password(data["password"])
+            data["password"] = user.password
+
+        serializer = userSerializer(
+            instance=user, data=data, partial=True)
+        if (serializer.is_valid(raise_exception=True)):
+            serializer.save()
+        return Response(userSerializer.to_user(user))
+
+    def deleteUser(self, request, id):
+        user = get_object_or_404(User.objects.all(),id=id)
+        user.delete()
+        return Response({'data': 'User deleted'})
+
+    def deleteUsers(self, request):
+        serializer_context = {
+            'ids': request.data['ids'],
+            'request': request
+        }
+
+        if len(serializer_context['ids']) > 0:
+            users,serializer = userSerializer.getUsersDelete(serializer_context)
+            if len(serializer) != len(serializer_context['ids']):
+                return Response({'data': "Some users doesn't exist"})
+            users.delete()
+            return Response({'data': 'Users deleted'})
+        return Response({'data': 'No users provided'})
+

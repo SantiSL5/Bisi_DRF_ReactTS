@@ -7,7 +7,17 @@ from django.db import connection, transaction
 class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('password', 'email', 'username', 'types')
+        fields = ('password', 'email', 'username', 'type')
+
+    def to_user(instance):
+        return {
+            'id': instance.id,
+            'email' : instance.email,
+            'username' : instance.username,
+            'balance' : instance.balance,
+            'img' : instance.img,
+            'type' : instance.type,
+        }
 
     def getUser(context):
         user = context['user']
@@ -118,3 +128,23 @@ class userSerializer(serializers.ModelSerializer):
     #     return {
     #         'token': user.token
     #     }
+    
+    def getAllUsers(context):
+
+        users = User.objects.all()
+        serialized_users= []
+        for user in users.iterator():
+            serialized_user=userSerializer.to_user(user)
+            serialized_users.append(serialized_user)
+
+        return serialized_users
+    
+    def getUsersDelete(context):
+
+        users = User.objects.filter(id__in=context['ids'])
+        serialized_users= []
+        for user in users.iterator():
+            serialized_user=userSerializer.to_user(user)
+            serialized_users.append(serialized_user)
+
+        return users,serialized_users

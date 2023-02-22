@@ -8,15 +8,15 @@ from bisi.apps.core.models import TimestampedModel
 from django.db import models
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password):
+    def create_user(self, username, email, password, balance=0, img="https://static.productionready.io/images/smiley-cyrus.jpg"):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
         )
         user.type="client"
         user.is_active=True
-        user.balance=0
-        user.img="https://static.productionready.io/images/smiley-cyrus.jpg"
+        user.balance=balance
+        user.img=img
         user.set_password(password)
         user.save()
         return user
