@@ -30,6 +30,40 @@ const userConsumer: any = {
             url: secrets.DJANGO_APP_URL + "/user/user",
         })
     },
+    getAll: () => {
+        return Api({
+            method: "get",
+            url: secrets.DJANGO_APP_URL + "/user/",
+        })
+    },
+    create: (data: any) => {
+        return Api({
+            method: "post",
+            url: secrets.DJANGO_APP_URL + "/user/",
+            data: data,
+        })
+    },
+    update: (data: any) => {
+        return Api({
+            method: "put",
+            url: secrets.DJANGO_APP_URL + "/user/" + data.id,
+            data: data,
+        })
+    },
+    delete: (data: any) => {
+        return Api({
+            method: "delete",
+            url: secrets.DJANGO_APP_URL + "/user/" + data,
+            data: data,
+        })
+    },
+    deleteMany: (data: any) => {
+        return Api({
+            method: "post",
+            url: secrets.DJANGO_APP_URL + "/user/deleteMany/",
+            data: data,
+        })
+    },
 }
 
 export default userConsumer;

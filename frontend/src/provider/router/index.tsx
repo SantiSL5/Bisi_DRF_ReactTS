@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import AdminGuard from "./guards/AdminGuard";
 import { NoAuthGuard } from "./guards/AuthGuard";
+import AdminUsers from "../pages/Admin/users";
 
 const Router = () => {
     return (
@@ -27,6 +28,7 @@ const Router = () => {
                             <Route path="stations/" element={<AdminStations />} />
                             <Route path="slots/" element={<AdminSlots />} />
                             <Route path="bikes/" element={<AdminBikes />} />
+                            <Route path="users/" element={<AdminUsers />} />
                         </Route>
                     </Route>
                     {/* <Route element={<NoAuthGuard />}> */}
