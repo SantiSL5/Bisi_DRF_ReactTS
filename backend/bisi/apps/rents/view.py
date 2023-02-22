@@ -17,6 +17,49 @@ class RentView(viewsets.GenericViewSet):
         serializer = RentSerializer.getAllRents(context)
         return Response(serializer,status=status.HTTP_200_OK)
     
+    def updateRent(self, request, id):
+
+        rent = get_object_or_404(Rent.objects.all(), id=id)
+        data = request.data
+                
+        serializer = RentSerializer(
+            instance=rent, data=data, partial=True)
+        if (serializer.is_valid(raise_exception=True)):
+            serializer.save()
+        return Response(RentSerializer.to_rent(rent))
+    
+    def deleteRent(self, request, id):
+        slot = get_object_or_404(Rent.objects.all(),id=id)
+        slot.delete()
+        return Response({'data': 'Rent deleted'})
+    
+    def deleteRents(self, request):
+        serializer_context = {
+            'ids': request.data['ids'],
+            'request': request
+        }
+
+        if len(serializer_context['ids']) > 0:
+            rents,serializer = RentSerializer.getRentsDelete(serializer_context)
+            if len(serializer) != len(serializer_context['ids']):
+                return Response({'data': "Some rents doesn't exist"})
+            rents.delete()
+            return Response({'data': 'Rents deleted'})
+        return Response({'data': 'No rents provided'})
+    
+class RentUserView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = RentSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
+
+    def getCurrentRent(self,request):
+        rent = RentSerializer.getCurrentRent(request.user.id)
+        if rent == False:
+            return Response(rent,status=status.HTTP_200_OK)
+        serializer = RentSerializer.to_rent(rent)
+        return Response(serializer,status=status.HTTP_200_OK)
+    
+        
     def createRent(self, request):
         bike=RentSerializer.Slot_bike(request.data)
         user=request.user.id
@@ -47,48 +90,6 @@ class RentView(viewsets.GenericViewSet):
         RentSerializer.Take_bike(serializer_context)
 
         return Response(serialized_data, status=status.HTTP_200_OK)
-    
-    def updateRent(self, request, id):
-
-        rent = get_object_or_404(Rent.objects.all(), id=id)
-        data = request.data
-                
-        serializer = RentSerializer(
-            instance=rent, data=data, partial=True)
-        if (serializer.is_valid(raise_exception=True)):
-            serializer.save()
-        return Response(RentSerializer.to_rent(rent))
-    
-    def deleteRent(self, request, id):
-        slot = get_object_or_404(Rent.objects.all(),id=id)
-        slot.delete()
-        return Response({'data': 'Rent deleted'})
-    
-    def deleteRents(self, request):
-        serializer_context = {
-            'ids': request.data['ids'],
-            'request': request
-        }
-
-        if len(serializer_context['ids']) > 0:
-            slots,serializer = RentSerializer.getRentsDelete(serializer_context)
-            if len(serializer) != len(serializer_context['ids']):
-                return Response({'data': "Some slots doesn't exist"})
-            slots.delete()
-            return Response({'data': 'Rents deleted'})
-        return Response({'data': 'No slots provided'})
-    
-class RentUserView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = RentSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
-
-    def getCurrentRent(self,request):
-        rent = RentSerializer.getCurrentRent(request.user.id)
-        if rent == False:
-            return Response(rent,status=status.HTTP_200_OK)
-        serializer = RentSerializer.to_rent(rent)
-        return Response(serializer,status=status.HTTP_200_OK)
     
     def returnBike(self,request):
         serializer = RentSerializer.returnBike(request.user.id, request.data['ending_slot'])
