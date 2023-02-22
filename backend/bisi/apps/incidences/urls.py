@@ -1,5 +1,5 @@
 from django.urls import path
-from .view import IncidenceUserView, IncidenceView
+from .view import IncidenceSlotView, IncidenceUserView, IncidenceView
 
 urlpatterns = [
     #CRUD
@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:id>', IncidenceView.as_view({'put': 'updateIncidence', 'delete': 'deleteIncidence'})),
     #User authenticated
     path('user/', IncidenceUserView.as_view({'post': 'createIncidence'})),
+    #All users
+    path('slot/<int:slot>', IncidenceSlotView.as_view({'get': 'getIncidencesSlot'})),
 ]

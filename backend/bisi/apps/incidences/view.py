@@ -95,3 +95,12 @@ class IncidenceUserView(viewsets.GenericViewSet):
         IncidenceSerializer.slotWarning(request.data['slot'])
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class IncidenceSlotView(viewsets.GenericViewSet):
+    permission_classes = (AllowAny,)
+    serializer_class = IncidenceSerializer
+    http_method_names = ['get']
+
+    def getIncidencesSlot(self, request, slot):
+        serializer = IncidenceSerializer.getIncidencesSlot(slot)
+        return Response(serializer,status=status.HTTP_200_OK)

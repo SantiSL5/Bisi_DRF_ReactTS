@@ -12,4 +12,4 @@ class Incidence(TimestampedModel):
         verbose_name_plural = "Incidences"
 
     def __str__(self):
-        return str(self.number)
+        return str(self.id)

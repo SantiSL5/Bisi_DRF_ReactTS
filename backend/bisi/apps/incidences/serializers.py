@@ -51,6 +51,16 @@ class IncidenceSerializer(serializers.ModelSerializer):
 
         return incidences,serialized_incidences
     
+    def getIncidencesSlot(slot):
+
+        incidences = Incidence.objects.filter(slot_id=slot)
+        serialized_incidences= []
+        for incidence in incidences.iterator():
+            serialized_incidence=IncidenceSerializer.to_incidence(incidence)
+            serialized_incidences.append(serialized_incidence)
+
+        return serialized_incidences
+    
     def getIncidenceById(id):
         if id != None:
             incidence = get_object_or_404(Incidence.objects.all(), id=id)
