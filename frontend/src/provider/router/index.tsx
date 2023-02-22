@@ -10,7 +10,7 @@ import AdminSlots from "../pages/Admin/slots";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import AdminGuard from "./guards/AdminGuard";
-import { NoAuthGuard } from "./guards/AuthGuard";
+import { NoAuthGuard, AuthGuard } from "./guards/AuthGuard";
 import AdminUsers from "../pages/Admin/users";
 
 const Router = () => {
@@ -31,9 +31,9 @@ const Router = () => {
                             <Route path="users/" element={<AdminUsers />} />
                         </Route>
                     </Route>
-                    {/* <Route element={<NoAuthGuard />}> */}
+                    <Route element={<AuthGuard />}>
                         <Route path="/profile/" element={<Profile />}></Route>
-                    {/* </Route> */}
+                    </Route>
                 </Routes>
             </Layout>
             <ToastContainer />
