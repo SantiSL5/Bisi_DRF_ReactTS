@@ -59,6 +59,11 @@ class RentUserView(viewsets.GenericViewSet):
         serializer = RentSerializer.to_rent(rent)
         return Response(serializer,status=status.HTTP_200_OK)
     
+
+    def getRentsByUser(self,request):
+        serializer = RentSerializer.getRentsByUser(request.user.id)
+        return Response(serializer,status=status.HTTP_200_OK)
+    
         
     def createRent(self, request):
         bike=RentSerializer.Slot_bike(request.data)

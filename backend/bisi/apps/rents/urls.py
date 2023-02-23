@@ -9,4 +9,5 @@ urlpatterns = [
     #User authenticated
     path('', RentUserView.as_view({'post': 'createRent'})),
     path('user', RentUserView.as_view({'get':'getCurrentRent', 'put':'returnBike'})),
+    path('user/rents', RentUserView.as_view({'get':'getRentsByUser'})),
 ]

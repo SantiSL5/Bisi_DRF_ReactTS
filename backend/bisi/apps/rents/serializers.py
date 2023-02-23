@@ -117,6 +117,16 @@ class RentSerializer(serializers.ModelSerializer):
 
         return serialized_rents
     
+    def getRentsByUser(user):
+
+        rents = Rent.objects.filter(user_id=user)
+        serialized_rents= []
+        for rent in rents.iterator():
+            serialized_rent=RentSerializer.to_rent(rent)
+            serialized_rents.append(serialized_rent)
+
+        return serialized_rents
+    
     def getRentsDelete(context):
 
         rents = Rent.objects.filter(id__in=context['ids'])
