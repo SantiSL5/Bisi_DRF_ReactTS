@@ -12,6 +12,7 @@ import Profile from "../pages/Profile";
 import AdminGuard from "./guards/AdminGuard";
 import { NoAuthGuard, AuthGuard } from "./guards/AuthGuard";
 import AdminUsers from "../pages/Admin/users";
+import AdminIncidences from "../pages/Admin/incidences";
 
 const Router = () => {
     return (
@@ -29,6 +30,7 @@ const Router = () => {
                             <Route path="slots/" element={<AdminSlots />} />
                             <Route path="bikes/" element={<AdminBikes />} />
                             <Route path="users/" element={<AdminUsers />} />
+                            <Route path="incidences/" element={<AdminIncidences />} />
                         </Route>
                     </Route>
                     <Route element={<AuthGuard />}>

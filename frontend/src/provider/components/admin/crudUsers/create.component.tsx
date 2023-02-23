@@ -58,7 +58,6 @@ const CreateUpdate = ({ createUser, operation, updateData, updateUser, changeFor
                             errors={errors}
                             name="username"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -87,7 +86,6 @@ const CreateUpdate = ({ createUser, operation, updateData, updateUser, changeFor
                             errors={errors}
                             name="email"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -111,7 +109,6 @@ const CreateUpdate = ({ createUser, operation, updateData, updateUser, changeFor
                             errors={errors}
                             name="password"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -132,7 +129,6 @@ const CreateUpdate = ({ createUser, operation, updateData, updateUser, changeFor
                             errors={errors}
                             name="balance"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -157,7 +153,6 @@ const CreateUpdate = ({ createUser, operation, updateData, updateUser, changeFor
                             errors={errors}
                             name="img"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>

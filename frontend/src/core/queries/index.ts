@@ -5,6 +5,7 @@ import stationQueries from "./stationQueries";
 import slotQueries from "./slotQueries";
 import jwtQueries from "./jwtQueries";
 import rentQueries from "./rentQueries";
+import incidenceQueries from "./incidenceQueries";
 
 export {
     queryConsumer,
@@ -14,4 +15,5 @@ export {
     stationQueries,
     jwtQueries,
     rentQueries,
+    incidenceQueries,
 };

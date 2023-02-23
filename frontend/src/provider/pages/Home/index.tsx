@@ -5,16 +5,19 @@ import RentModal from "../../components/rent/modal.component";
 import Spinner from "../../components/spinner/spinner.component";
 import { useUsers } from "../../hooks/useUsers";
 import { useRents } from "../../hooks/useRents";
+import { useIncidences } from "../../hooks/useIncidences";
 
 const Home = () => {
     const { stationsWithSlots, getStationsWithSlots } = useStations();
     const { lastRent, rentBike, returnBike, getRentInfo } = useRents();
     const { user } = useUsers();
+    const { incidence, getIncidenceById } = useIncidences();
 
     if (!stationsWithSlots) getStationsWithSlots();
     const [selectedSlot, setSelectedSlot]: any = useState();
 
     const getModalInfo = (slot: any) => {
+        getIncidenceById(slot.id)
         if (user) {
             getRentInfo()
         }

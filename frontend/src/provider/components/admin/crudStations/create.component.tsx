@@ -50,7 +50,6 @@ const CreateUpdate = ({ createStation, operation, updateData, updateStation, cha
                             errors={errors}
                             name="name"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
@@ -77,7 +76,6 @@ const CreateUpdate = ({ createStation, operation, updateData, updateStation, cha
                                     errors={errors}
                                     name="slots"
                                     render={({ messages }) => {
-                                        console.log("messages", messages);
                                         return messages
                                             ? Object.entries(messages).map(([type, message]) => (
                                                 <p key={type}>{message}</p>

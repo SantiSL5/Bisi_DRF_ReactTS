@@ -53,7 +53,6 @@ const CreateUpdate = ({ createBike, operation, updateData, updateBike, changeFor
                             errors={errors}
                             name="number"
                             render={({ messages }) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <p key={type}>{message}</p>
