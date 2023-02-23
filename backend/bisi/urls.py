@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/slot/', include('bisi.apps.slots.urls')),
     path('api/user/', include('bisi.apps.users.urls')),
     path('api/rent/', include('bisi.apps.rents.urls')),
-    path('api/incidence/', include('bisi.apps.incidences.urls'))
+    path('api/incidence/', include('bisi.apps.incidences.urls')),
+    path('api/notification/', include('bisi.apps.notifications.urls'))
 ]

@@ -7,5 +7,6 @@ python3 manage.py makemigrations stations
 python3 manage.py makemigrations slots
 python3 manage.py makemigrations rents
 python3 manage.py makemigrations incidences
+python3 manage.py makemigrations notifications
 python3 manage.py migrate
 exec "$@";

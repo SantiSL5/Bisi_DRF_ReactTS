@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'bisi.apps.slots',
     'bisi.apps.rents',
     'bisi.apps.incidences',
+    'bisi.apps.notifications',
 ]
 
 MIDDLEWARE = [
