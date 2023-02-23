@@ -8,11 +8,11 @@ export function useNotifications() {
     const [notifications, setNotifications]: any = useState(undefined);
     const [userNotifications, setUserNotifications]: any = useState(undefined);
 
-    useEffect(() => {
+    const getAll = (() => {
         consume(queryConsumer.apiNotification, notificationQueries.getAllNotifications).then((res: any) => {
             setNotifications(res.data);
         })
-    }, [])
+    })
 
     const getUserNotifications = (() => {
         consume(queryConsumer.apiNotification, notificationQueries.getUserNotification).then((res: any) => {
@@ -96,6 +96,6 @@ export function useNotifications() {
         })
     })
 
-    return { notifications, userNotifications, getUserNotifications, getAdminNotifications, createNotification, deleteNotification, deleteManyNotifications, updateNotification, markAsRead, markAsReadAdmin };
+    return { getAll, notifications, userNotifications, getUserNotifications, getAdminNotifications, createNotification, deleteNotification, deleteManyNotifications, updateNotification, markAsRead, markAsReadAdmin };
 
 }

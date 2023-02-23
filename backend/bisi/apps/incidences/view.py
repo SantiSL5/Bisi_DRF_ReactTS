@@ -11,7 +11,7 @@ from ..slots.models import Slot
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class IncidenceView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated, IsAdmin)
+    permission_classes = (AllowAny,)
     serializer_class = IncidenceSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 

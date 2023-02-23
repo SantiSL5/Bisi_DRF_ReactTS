@@ -12,7 +12,7 @@ const bikeConsumer: any = {
     createOne: (data: any) => {
         return Api({
             method: "post",
-            url: secret.DJANGO_APP_URL + "/bike/",
+            url: secret.DJANGO_APP_URL + "/bike/create/",
             data: data
         })
     },

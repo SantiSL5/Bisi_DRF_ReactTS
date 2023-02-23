@@ -26,7 +26,7 @@ const rentConsumer: any = {
     getUserRent: (data: any) => {
         return Api({
             method: "get",
-            url: secret.DJANGO_APP_URL + "/rent/",
+            url: secret.DJANGO_APP_URL + "/rent/user/rents",
             data: data
         })
     },

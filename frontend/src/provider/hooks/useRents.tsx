@@ -6,6 +6,7 @@ import { useStations } from './useStations';
 export function useRents() {
 
     const [rents, setRents]: any = useState(undefined);
+    const [userRents, setUserRents]: any = useState(undefined);
     const [lastRent, setLastRent]: any = useState(undefined);
     const { getStationsWithSlots } = useStations();
 
@@ -14,6 +15,14 @@ export function useRents() {
         //     setRents(res.data);
         // })
     }, [])
+
+    const getUserRents = (() => {
+        consume(queryConsumer.apiRent, rentQueries.getUserRent).then((res: any) => {
+            setUserRents(res.data);
+        }).catch((e: any) => {
+            console.log(e);
+        })
+    })
 
     const rentBike = ((data: any) => {
         consume(queryConsumer.apiRent, rentQueries.rentBike, data).then((res: any) => {
@@ -96,6 +105,6 @@ export function useRents() {
         })
     })
 
-    return { rents, lastRent, createRent, deleteRent, deleteManyRents, updateRent, rentBike, returnBike, getRentInfo };
+    return { rents, lastRent, userRents, getUserRents, createRent, deleteRent, deleteManyRents, updateRent, rentBike, returnBike, getRentInfo };
 
 }

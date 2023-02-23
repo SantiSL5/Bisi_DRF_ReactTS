@@ -43,11 +43,11 @@ const ListIncidences = ({ list }: any) => {
             selector: (row: any) => row.slot,
             sortable: true
         },
-        {
-            name: 'User',
-            selector: (row: any) => <>{<span>{row.user}</span>}</>,
-            sortable: true
-        },
+        // {
+        //     name: 'User',
+        //     selector: (row: any) => <>{<span>{row.user}</span>}</>,
+        //     sortable: true
+        // },
         {
             name: 'State',
             selector: (row: any) => row.state,

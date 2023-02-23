@@ -7,9 +7,11 @@ import { useNotifications } from "../../hooks/useNotifications";
 
 
 const AdminNotifications = () => {
-    const { notifications, createNotification, deleteNotification, deleteManyNotifications, updateNotification } = useNotifications();
+    const { getAll, notifications, createNotification, deleteNotification, deleteManyNotifications, updateNotification } = useNotifications();
     const [op, setOp]: any = useState("create");
     const [updateData, setupdateData]: any = useState();
+
+    if (!notifications) getAll()
 
     const changeForm = (data: any, op: string) => {
         if (op == "create") {

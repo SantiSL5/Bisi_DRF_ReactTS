@@ -17,8 +17,6 @@ const Header = (props: HeaderProps) => {
     else if (!userNotifications && user && isAdmin) getAdminNotifications()
     if (!lastRent && user) getRentInfo();
 
-    console.log(userNotifications);
-
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
