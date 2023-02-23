@@ -10,6 +10,10 @@ html {
     background-color: #212529;
 }
 
+.cross-img {
+    cursor: pointer;
+}
+
 /* body {
     text-align: center;
     display: grid;

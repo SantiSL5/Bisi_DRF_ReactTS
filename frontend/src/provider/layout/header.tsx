@@ -68,7 +68,7 @@ const Header = (props: HeaderProps) => {
                                                     ? <li className="dropdown-item">No unread notifications</li>
                                                     : <>{userNotifications.map((noti: any, i: number) => {
                                                         return (
-                                                            <li key={noti.id} className="dropdown-item me-4">{noti.message}<img src={`/assets/cross.png`} alt="unavailable" className="img-fluid" width="30px" onClick={() => !isAdmin ? markAsRead({ notification: noti.id }) : markAsReadAdmin({ notification: noti.id })} /> </li>
+                                                            <li key={noti.id} className="dropdown-item me-4">{noti.message}<img src={`/assets/cross.png`} alt="unavailable" className="img-fluid cross-img" width="30px" onClick={() => !isAdmin ? markAsRead({ notification: noti.id }) : markAsReadAdmin({ notification: noti.id })} /> </li>
                                                         )
                                                     })}
                                                     </>

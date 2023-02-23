@@ -2,6 +2,7 @@
 const incidenceQueries: any = {
     getAllIncidences: "getAll",
     getIncidenceById: "getById",
+    getIncidencesByUser: "getByUser",
     createIncidence: "createOne",
     createIncidenceUser: "createOneByUser",
     deleteIncidence: "deleteOne",

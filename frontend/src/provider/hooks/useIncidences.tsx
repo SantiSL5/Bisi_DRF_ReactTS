@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 
 export function useIncidences() {
 
+    const [incidencesUser, setIncidencesUser]: any = useState(undefined);
     const [incidences, setIncidences]: any = useState(undefined);
     const [incidence, setIncidence]: any = useState(undefined);
 
@@ -19,6 +20,15 @@ export function useIncidences() {
             setIncidence(res.data)
         }).catch((e: any) => {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
+        })
+    })
+
+    const getIncidencesByUser = (() => {
+        consume(queryConsumer.apiIncidence, incidenceQueries.getIncidencesByUser).then((res: any) => {
+            setIncidencesUser(res.data)
+        }).catch((e: any) => {
+            console.log(e)
+            // toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
 
@@ -41,6 +51,8 @@ export function useIncidences() {
             toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
+
+    
 
     const deleteIncidence = ((data: any) => {
         consume(queryConsumer.apiIncidence, incidenceQueries.deleteIncidence, data).then((res: any) => {
@@ -83,6 +95,6 @@ export function useIncidences() {
         })
     })
 
-    return { incidences, incidence, getIncidenceById, createIncidence, createIncidenceUser, deleteIncidence, deleteManyIncidences, updateIncidence };
+    return { incidences, incidencesUser, incidence, getIncidenceById, getIncidencesByUser, createIncidence, createIncidenceUser, deleteIncidence, deleteManyIncidences, updateIncidence };
 
 }
