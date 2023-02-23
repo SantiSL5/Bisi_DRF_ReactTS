@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import StationSerializer
@@ -21,6 +22,12 @@ class StationView(viewsets.GenericViewSet):
     def getAllStationsWithSlots(self,request):
         serializer = StationSerializer.getAllStationsWithSlots(context)
         return Response(serializer,status=status.HTTP_200_OK)
+    
+class StationAdminView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated, IsAdmin,)
+    serializer_class = StationSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
+
     
     def createStation(self, request):
 

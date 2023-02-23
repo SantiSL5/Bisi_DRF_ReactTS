@@ -18,7 +18,7 @@ const stationConsumer: any = {
     createOne: (data: any) => {
         return Api({
             method: "post",
-            url: secret.DJANGO_APP_URL + "/station/",
+            url: secret.DJANGO_APP_URL + "/station/create/",
             data: data
         })
     },

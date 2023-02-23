@@ -8,6 +8,9 @@ from .models import User
 from .serializers import userSerializer
 from rest_framework.permissions import (
     AllowAny, IsAuthenticated)
+from ..core .permissions import (
+    IsAdmin
+)
 
 
 class UserView(viewsets.GenericViewSet):
@@ -72,20 +75,16 @@ class UserAuthenticatedView(viewsets.GenericViewSet):
         }
         serializer = userSerializer.addFunds(context=serializer_context)
         return Response(serializer)
-
-    # def refreshToken(self, request):
-    #     username = request.user
-
-    #     serializer_context = {
-    #         'username': username
-    #     }
-
-    #     serializer = userSerializer.refreshToken(serializer_context)
-    #     return Response(serializer)
     
+class UserAdminView(viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated,IsAdmin]
+    serializer_class = userSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
+
     def getAllUsers(self,request):
         serializer = userSerializer.getAllUsers(context)
         return Response(serializer,status=status.HTTP_200_OK)
+
 
     def createUser(self, request):
 

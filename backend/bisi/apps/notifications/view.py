@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import NotificationSerializer
@@ -10,7 +11,7 @@ from ..slots.models import Slot
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class NotificationView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated, IsAdmin)
     serializer_class = NotificationSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
@@ -78,7 +79,7 @@ class NotificationView(viewsets.GenericViewSet):
 class NotificationUserView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = NotificationSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get', 'post', 'put']
 
     def createNotification(self, request):
 

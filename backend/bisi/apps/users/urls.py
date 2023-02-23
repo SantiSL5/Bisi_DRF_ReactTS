@@ -1,5 +1,5 @@
 from django.urls import path
-from .view import UserView, UserAuthenticatedView
+from .view import UserView, UserAuthenticatedView, UserAdminView
 
 urlpatterns = [
     path('register/', UserView.as_view({'post': 'register'})),
@@ -10,8 +10,8 @@ urlpatterns = [
     path('addFunds', UserAuthenticatedView.as_view({'put': 'addFunds'})),
     
     # CRUD
-    path('', UserAuthenticatedView.as_view({'get': 'getAllUsers', 'post': 'createUser'})),
-    path('<int:id>', UserAuthenticatedView.as_view({'put': 'updateUser', 'delete': 'deleteUser'})),
-    path('deleteMany/', UserAuthenticatedView.as_view({'post': 'deleteUsers'})),
+    path('', UserAdminView.as_view({'get': 'getAllUsers', 'post': 'createUser'})),
+    path('<int:id>', UserAdminView.as_view({'put': 'updateUser', 'delete': 'deleteUser'})),
+    path('deleteMany/', UserAdminView.as_view({'post': 'deleteUsers'})),
     
 ]

@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import IncidenceSerializer
@@ -10,7 +11,7 @@ from ..slots.models import Slot
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class IncidenceView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated, IsAdmin)
     serializer_class = IncidenceSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
@@ -103,7 +104,7 @@ class IncidenceView(viewsets.GenericViewSet):
 class IncidenceUserView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = IncidenceSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get', 'post']
 
     def createIncidence(self, request):
 

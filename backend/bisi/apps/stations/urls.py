@@ -1,9 +1,11 @@
 from django.urls import path
-from .view import StationView
+from .view import StationAdminView, StationView
 
 urlpatterns = [
-    path('', StationView.as_view({'get':'getAllStations', 'post': 'createStation'})),
+    path('', StationView.as_view({'get':'getAllStations'})),
     path('slots', StationView.as_view({'get':'getAllStationsWithSlots'})),
-    path('deleteMany/', StationView.as_view({'post': 'deleteStations'})),
-    path('<int:id>', StationView.as_view({'put': 'updateStation', 'delete': 'deleteStation'})),
+    #CRUD
+    path('create/', StationAdminView.as_view({'post': 'createStation'})),
+    path('deleteMany/', StationAdminView.as_view({'post': 'deleteStations'})),
+    path('<int:id>', StationAdminView.as_view({'put': 'updateStation', 'delete': 'deleteStation'})),
 ]

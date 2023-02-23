@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import SlotSerializer
@@ -10,13 +11,17 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class SlotView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = SlotSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get']
 
     
     def getAllSlots(self,request):
         serializer = SlotSerializer.getAllSlots(context)
         return Response(serializer,status=status.HTTP_200_OK)
-    
+
+class SlotAdminView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated, IsAdmin,)
+    serializer_class = SlotSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
     def createSlot(self, request):
 
         serializer_context = {

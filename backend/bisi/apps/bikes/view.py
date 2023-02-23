@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import BikeSerializer
@@ -12,12 +13,17 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 class BikeView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
     serializer_class = BikeSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get']
 
     
     def getAllBikes(self,request):
         serializer = BikeSerializer.getAllBikes(context)
         return Response(serializer,status=status.HTTP_200_OK)
+
+class BikeAdminView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated, IsAdmin)
+    serializer_class = BikeSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
 
     def createBike(self, request):
 

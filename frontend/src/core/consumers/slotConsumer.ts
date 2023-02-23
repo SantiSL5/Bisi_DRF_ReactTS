@@ -12,7 +12,7 @@ const slotConsumer: any = {
     createOne: (data: any) => {
         return Api({
             method: "post",
-            url: secret.DJANGO_APP_URL + "/slot/",
+            url: secret.DJANGO_APP_URL + "/slot/create/",
             data: data
         })
     },

@@ -1,3 +1,4 @@
+from ..core .permissions import IsAdmin
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import RentSerializer
@@ -8,15 +9,20 @@ from .models import Rent
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class RentView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = RentSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get']
 
     
     def getAllRents(self,request):
         serializer = RentSerializer.getAllRents(context)
         return Response(serializer,status=status.HTTP_200_OK)
-    
+
+class RentAdminView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated, IsAdmin)
+    serializer_class = RentSerializer
+    http_method_names = ['get', 'post', 'put', 'delete']
+
     def updateRent(self, request, id):
 
         rent = get_object_or_404(Rent.objects.all(), id=id)
@@ -50,7 +56,7 @@ class RentView(viewsets.GenericViewSet):
 class RentUserView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = RentSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']
+    http_method_names = ['get', 'post', 'put']
 
     def getCurrentRent(self,request):
         rent = RentSerializer.getCurrentRent(request.user.id)
