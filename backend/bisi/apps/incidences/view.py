@@ -1,7 +1,7 @@
 from rest_framework.generics import get_object_or_404
 from django.template import context
 from .serializers import IncidenceSerializer
-from ..slots.serializers import SlotSerializer
+from ..notifications .serializers import NotificationSerializer
 # from rest_framework.exceptions import NotFound
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.response import Response 
@@ -38,13 +38,43 @@ class IncidenceView(viewsets.GenericViewSet):
         serializer.save()
         IncidenceSerializer.slotWarning(request.data['slot'])
 
+        nserializer_context = {
+            'user': None,
+            'message': "New incidence created by admin",
+            'active': True,
+            'request': request
+        }
+
+        nserializer = NotificationSerializer(
+            data = nserializer_context,
+            context = nserializer_context
+        )
+
+        nserializer.is_valid(raise_exception=True)
+        nserializer.save()
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
     def updateIncidence(self, request, id):
         incidence = get_object_or_404(Incidence.objects.all(), id=id)
         data = request.data
-                
+        if request.data.get("state") != None:
+            nserializer_context = {
+                'user': incidence.user_id,
+                'message': "The incidence with id '" + str(incidence.id) + "' is now " + request.data["state"] if incidence.user_id == None else "Your incidence with id '" + str(incidence.id) + "' is now " + request.data["state"],
+                'active': True,
+                'request': request
+            }
+
+            nserializer = NotificationSerializer(
+                data = nserializer_context,
+                context = nserializer_context
+            )
+
+            nserializer.is_valid(raise_exception=True)
+            nserializer.save()
+
         serializer = IncidenceSerializer(
             instance=incidence, data=data, partial=True)
         if (serializer.is_valid(raise_exception=True)):
@@ -93,6 +123,21 @@ class IncidenceUserView(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         IncidenceSerializer.slotWarning(request.data['slot'])
+
+        nserializer_context = {
+            'user': request.user.id,
+            'message': "New incidence created by user",
+            'active': True,
+            'request': request
+        }
+
+        nserializer = NotificationSerializer(
+            data = nserializer_context,
+            context = nserializer_context
+        )
+
+        nserializer.is_valid(raise_exception=True)
+        nserializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     
