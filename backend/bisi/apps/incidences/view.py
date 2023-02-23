@@ -140,6 +140,11 @@ class IncidenceUserView(viewsets.GenericViewSet):
         nserializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def getIncidencesByUser(self,request):
+        serializer = IncidenceSerializer.getIncidencesByUser(request.user.id)
+        return Response(serializer,status=status.HTTP_200_OK)
     
 class IncidenceSlotView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)

@@ -41,6 +41,16 @@ class IncidenceSerializer(serializers.ModelSerializer):
 
         return serialized_incidences
     
+    def getIncidencesByUser(user):
+
+        incidences = Incidence.objects.filter(user_id=user)
+        serialized_incidences= []
+        for incidence in incidences.iterator():
+            serialized_incidence=IncidenceSerializer.to_incidence(incidence)
+            serialized_incidences.append(serialized_incidence)
+
+        return serialized_incidences
+    
     def getIncidencesDelete(context):
 
         incidences = Incidence.objects.filter(id__in=context['ids'])
