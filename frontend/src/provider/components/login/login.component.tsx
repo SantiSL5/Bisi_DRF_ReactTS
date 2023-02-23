@@ -49,8 +49,8 @@ const LoginForm = ({ login }: any) => {
                             {...register("password", {
                                 required: "required",
                                 minLength: {
-                                    value: 5,
-                                    message: "min length is 5"
+                                    value: 8,
+                                    message: "Min length is 8"
                                 }
                             })}
                             type="password"

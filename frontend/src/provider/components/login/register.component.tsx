@@ -14,6 +14,7 @@ const RegisterForm = ({ registerH }: any) => {
         register,
         formState: { errors },
         handleSubmit,
+        getValues,
         setValue
     } = useForm<IFormInputs>({
         criteriaMode: "all"
@@ -50,8 +51,8 @@ const RegisterForm = ({ registerH }: any) => {
                             {...register("username", {
                                 required: "required",
                                 minLength: {
-                                    value: 2,
-                                    message: "min length is 2"
+                                    value: 3,
+                                    message: "Min length is 3"
                                 }
                             })}
                             type="text"
@@ -64,9 +65,9 @@ const RegisterForm = ({ registerH }: any) => {
                             className="form-control mt-2"
                             {...register("password", {
                                 required: "required",
-                                minLength: {
-                                    value: 2,
-                                    message: "min length is 2"
+                                pattern: {
+                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                    message: "Introduce a strong password"
                                 }
                             })}
                             type="password"
@@ -79,9 +80,9 @@ const RegisterForm = ({ registerH }: any) => {
                             className="form-control mt-2"
                             {...register("repeatPassword", {
                                 required: "required",
-                                minLength: {
-                                    value: 2,
-                                    message: "min length is 2"
+                                validate: (value) => {
+                                    const { password } = getValues();
+                                    return password === value || "Passwords should match";
                                 }
                             })}
                             type="password"
