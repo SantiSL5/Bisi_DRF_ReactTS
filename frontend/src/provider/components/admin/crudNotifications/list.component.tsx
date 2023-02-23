@@ -49,25 +49,15 @@ const List = ({ list, deleteNotification, deleteManyNotifications, changeForm, u
             sortable: true
         },
         {
-            name: 'User ID',
-            selector: (row: any) => row.user,
+            name: 'User',
+            selector: (row: any) => <>{row.user == null ? <span>Admin</span> : <span>{row.user}</span>}</>,
             sortable: true
         },
         {
             name: 'Active',
             selector: (row: any) => <input type="checkbox" checked={row.active}
-                onChange={() => clickUpdate({ data: { data: { warning: !row.active }, id: row.id } })}
+                onChange={() => clickUpdate({ data: { data: { active: !row.active }, id: row.id } })}
             />,
-            sortable: true
-        },
-        {
-            name: 'State',
-            selector: (row: any) =>
-                <select className="form-select" aria-label="Default select example" defaultValue={row.state} onChange={() => clickUpdate({ data: { data: { disabled: !row.disabled }, id: row.id } })}>
-                    <option value="Pending" disabled={row.state === "On Process" || row.state === "Solved"}>Pending</option>
-                    <option value="On Process" disabled={row.state === "Solved"}>On Process</option>
-                    <option value="Solved">Solved</option>
-                </select >,
             sortable: true
         },
         {

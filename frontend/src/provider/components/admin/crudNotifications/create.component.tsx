@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 
 interface IFormInputs {
     message: string,
-    slot: string,
-    state: string,
+    user: string,
 }
 
 const CreateUpdate = ({ createNotification, operation, updateData, updateNotification, changeForm }: any) => {
@@ -50,15 +49,15 @@ const CreateUpdate = ({ createNotification, operation, updateData, updateNotific
                     </label>
                 </div>
                 <div className="mb-2">
-                    <label htmlFor="slot" className="form-label text-white">Slot ID:
-                        <input id="slot" type="number" className="form-control mt-2"
-                            {...register("slot", {
-                                required: "This input is required.",
+                    <label htmlFor="user" className="form-label text-white">User ID:
+                        <input id="user" type="number" className="form-control mt-2"
+                            {...register("user", {
+                                // required: "This input is required.",
                             })}
                         />
                         <ErrorMessage
                             errors={errors}
-                            name="slot"
+                            name="user"
                             render={({ messages }) => {
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
@@ -69,15 +68,6 @@ const CreateUpdate = ({ createNotification, operation, updateData, updateNotific
                         />
                     </label>
                 </div>
-                <div className="mb-4 mt-4 col-7 col-md-4 col-lg-2">
-                    <select className="form-select" aria-label="Default select example" {...register("state", { required: true })}>
-                        <option value="Pending">Pending</option>
-                        <option value="On Process">On Process</option>
-                        <option value="Solved">Solved</option>
-                    </select >
-                </div>
-
-
                 <button type="submit" className="btn btn-success">Create</button>
             </form>
 

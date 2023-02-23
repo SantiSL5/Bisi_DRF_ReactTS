@@ -22,7 +22,7 @@ class NotificationView(viewsets.GenericViewSet):
     def createNotification(self, request):
 
         serializer_context = {
-            'user': None,
+            'user': request.data['user'],
             'message': request.data['message'],
             'active': True,
             'request': request

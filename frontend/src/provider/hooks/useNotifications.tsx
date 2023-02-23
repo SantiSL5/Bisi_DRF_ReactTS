@@ -63,7 +63,8 @@ export function useNotifications() {
             // toast.success("Marked as read", { theme: "dark" })
             setUserNotifications(userNotifications.filter((item: any) => data.notification !== item.id));
         }).catch((e: any) => {
-            toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
+            console.log(e);
+            // toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
         })
     })
 
