@@ -6,6 +6,7 @@ import slotQueries from "./slotQueries";
 import jwtQueries from "./jwtQueries";
 import rentQueries from "./rentQueries";
 import incidenceQueries from "./incidenceQueries";
+import notificationQueries from "./notificationQueries";
 
 export {
     queryConsumer,
@@ -16,4 +17,5 @@ export {
     jwtQueries,
     rentQueries,
     incidenceQueries,
+    notificationQueries,
 };

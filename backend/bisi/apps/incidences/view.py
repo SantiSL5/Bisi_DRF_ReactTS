@@ -10,7 +10,7 @@ from ..slots.models import Slot
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class IncidenceView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = IncidenceSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
@@ -125,7 +125,7 @@ class IncidenceUserView(viewsets.GenericViewSet):
         IncidenceSerializer.slotWarning(request.data['slot'])
 
         nserializer_context = {
-            'user': request.user.id,
+            'user': None,
             'message': "New incidence created by user",
             'active': True,
             'request': request

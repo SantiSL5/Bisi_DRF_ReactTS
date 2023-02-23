@@ -5,6 +5,7 @@ import slotConsumer from "./slotConsumer";
 import jwtConsumer from "./jwtConsumer";
 import rentConsumer from "./rentConsumer";
 import incidenceConsumer from "./incidenceConsumer";
+import notificationConsumer from "./notificationConsumer";
 
 const consumers: any = {
     ApiUser: { ...userConsumer },
@@ -14,6 +15,7 @@ const consumers: any = {
     ApiJwt: { ...jwtConsumer },
     ApiRent: { ...rentConsumer },
     ApiIncidence: { ...incidenceConsumer },
+    ApiNotification: { ...notificationConsumer },
 }
 
 export default consumers;

@@ -1,24 +1,17 @@
 import DataTable from 'react-data-table-component';
-import React, { useState } from "react";
+import React from "react";
 
-const List = ({ list, deleteIncidence, deleteManyIncidences, changeForm, updateIncidence }: any) => {
+const List = ({ list, deleteNotification, deleteManyNotifications, changeForm, updateNotification }: any) => {
     const [selectedRows, setSelectedRows]: any = React.useState(false);
     const [toggledClearRows] = React.useState(false);
-    const [selectValue, setSelectValue]: any = useState();
 
     const handleChange = ({ selectedRows }: any) => {
         setSelectedRows(selectedRows);
     };
 
     const clickUpdate = ({ data }: any) => {
-        updateIncidence(data);
+        updateNotification(data);
     };
-
-    function onSubmit(data: any) {
-        data.preventDefault();
-        updateIncidence({ data: { state: data.target[0].value }, id: selectValue });
-    }
-
 
     const customSort = (rows: any, selector: any, direction: any) => {
         return rows.sort((rowA: any, rowB: any) => {
@@ -56,26 +49,25 @@ const List = ({ list, deleteIncidence, deleteManyIncidences, changeForm, updateI
             sortable: true
         },
         {
-            name: 'Slot',
-            selector: (row: any) => row.slot,
+            name: 'User ID',
+            selector: (row: any) => row.user,
             sortable: true
         },
         {
-            name: 'User',
-            selector: (row: any) => <>{row.user == null ? <span>Admin</span> : <span>{row.user}</span>}</>,
+            name: 'Active',
+            selector: (row: any) => <input type="checkbox" checked={row.active}
+                onChange={() => clickUpdate({ data: { data: { warning: !row.active }, id: row.id } })}
+            />,
             sortable: true
         },
         {
             name: 'State',
-            selector: (row: any) => <>
-                <form onSubmit={onSubmit}>
-                    <select className="form-select col" aria-label="Default select example" defaultValue={row.state} onChange={() => setSelectValue(row.id)}>
-                        <option value="Pending" disabled={row.state === "On Process" || row.state === "Solved"}>Pending</option>
-                        <option value="On Process" disabled={row.state === "Solved"}>On Process</option>
-                        <option value="Solved">Solved</option>
-                    </select>
-                    <button className='btn btn-info' type='submit' onClick={() => setSelectValue(row.id)}>Submit</button>
-                </form></>,
+            selector: (row: any) =>
+                <select className="form-select" aria-label="Default select example" defaultValue={row.state} onChange={() => clickUpdate({ data: { data: { disabled: !row.disabled }, id: row.id } })}>
+                    <option value="Pending" disabled={row.state === "On Process" || row.state === "Solved"}>Pending</option>
+                    <option value="On Process" disabled={row.state === "Solved"}>On Process</option>
+                    <option value="Solved">Solved</option>
+                </select >,
             sortable: true
         },
         {
@@ -83,7 +75,7 @@ const List = ({ list, deleteIncidence, deleteManyIncidences, changeForm, updateI
             selector: (row: any) =>
                 <div>
                     <button type="button" className='btn btn-danger' onClick={() => {
-                        deleteIncidence(row.id)
+                        deleteNotification(row.id)
                     }}>Delete</button>
                 </div>,
             sortable: true
@@ -93,7 +85,7 @@ const List = ({ list, deleteIncidence, deleteManyIncidences, changeForm, updateI
     return (
         <div>
             <button type='button' className='btn btn-danger mt-2 mb-2 ms-2' disabled={selectedRows.length === 0} onClick={() => {
-                deleteManyIncidences(selectedRows)
+                deleteManyNotifications(selectedRows)
             }}>Delete selected</button>
             {
                 <DataTable

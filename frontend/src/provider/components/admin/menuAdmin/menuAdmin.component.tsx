@@ -16,6 +16,7 @@ const MenuAdmin = () => {
                             <Link className="nav-item nav-link" to="/admin/bikes">Bikes</Link>
                             <Link className="nav-item nav-link" to="/admin/users">Users</Link>
                             <Link className="nav-item nav-link" to="/admin/incidences">Incidences</Link>
+                            <Link className="nav-item nav-link" to="/admin/notifications">Notifications</Link>
                         </div>
                     </div>
                 </div>

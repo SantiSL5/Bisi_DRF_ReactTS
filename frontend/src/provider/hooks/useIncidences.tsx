@@ -68,7 +68,11 @@ export function useIncidences() {
     })
 
     const updateIncidence = ((data: any) => {
+        console.log(data);
+        
         consume(queryConsumer.apiIncidence, incidenceQueries.updateIncidence, data).then((res: any) => {
+            console.log(res.data);
+            
             let aux = [...incidences];
             let index = aux.findIndex((x: any) => x.id === data.id);
             aux[index] = res.data;

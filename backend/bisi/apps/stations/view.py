@@ -9,7 +9,7 @@ from .models import Station
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class StationView(viewsets.GenericViewSet):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = StationSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 

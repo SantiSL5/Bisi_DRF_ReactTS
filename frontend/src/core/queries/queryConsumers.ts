@@ -8,6 +8,7 @@ const queryConsumer: any = {
     apiJwt: "ApiJwt",
     apiRent: "ApiRent",
     apiIncidence: "ApiIncidence",
+    apiNotification: "ApiNotification",
 }
 
 export default queryConsumer;

@@ -10,7 +10,7 @@ from ..slots.models import Slot
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
 
 class NotificationView(viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = NotificationSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 

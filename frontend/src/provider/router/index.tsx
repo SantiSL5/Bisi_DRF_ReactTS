@@ -3,6 +3,7 @@ import Admin from "../pages/Admin/";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { NoAuthGuard, AuthGuard } from "./guards/AuthGuard";
 import Layout from "../layout";
 import AdminBikes from "../pages/Admin/bikes";
 import AdminStations from "../pages/Admin/stations";
@@ -10,9 +11,9 @@ import AdminSlots from "../pages/Admin/slots";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import AdminGuard from "./guards/AdminGuard";
-import { NoAuthGuard, AuthGuard } from "./guards/AuthGuard";
 import AdminUsers from "../pages/Admin/users";
 import AdminIncidences from "../pages/Admin/incidences";
+import AdminNotifications from "../pages/Admin/notifications";
 
 const Router = () => {
     return (
@@ -31,6 +32,7 @@ const Router = () => {
                             <Route path="bikes/" element={<AdminBikes />} />
                             <Route path="users/" element={<AdminUsers />} />
                             <Route path="incidences/" element={<AdminIncidences />} />
+                            <Route path="notifications/" element={<AdminNotifications />} />
                         </Route>
                     </Route>
                     <Route element={<AuthGuard />}>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./style.css"
 import { useUsers } from "../hooks/useUsers";
 import { useRents } from "../hooks/useRents";
+import { useNotifications } from "../hooks/useNotifications";
 
 interface HeaderProps {
     title: string,
@@ -10,8 +11,13 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
     const { user, isAdmin, logout } = useUsers();
     const { lastRent, getRentInfo } = useRents();
+    const { userNotifications, getUserNotifications, getAdminNotifications, markAsRead, markAsReadAdmin } = useNotifications();
 
+    if (!userNotifications && user && !isAdmin) getUserNotifications()
+    else if (!userNotifications && user && isAdmin) getAdminNotifications()
     if (!lastRent && user) getRentInfo();
+
+    console.log(userNotifications);
 
     return (
         <>
@@ -36,7 +42,7 @@ const Header = (props: HeaderProps) => {
                                         : <img src={`/assets/gray_bike.png`} alt="unavailable" className="img-fluid me-4" width="30px" />
                                     }
 
-                                    <div className="me-4 dropdown">
+                                    <div className=" dropdown">
                                         <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             {user.balance <= 0
                                                 ? <span className="text-danger fw-bold">{user.balance.toFixed(2)} €</span>
@@ -47,6 +53,29 @@ const Header = (props: HeaderProps) => {
                                             <li><Link className="dropdown-item" to="/profile">Add funds</Link></li>
                                         </ul>
                                     </div>
+                                    {userNotifications
+                                        ? <div className="me-1 dropstart">
+                                            <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                                {userNotifications.length == 0
+                                                    ? <img src={`/assets/bell.png`} alt="unavailable" className="img-fluid" width="30px" />
+                                                    : <><span className="position-absolute top-0 start-0 badge rounded-pill bg-danger">{userNotifications.length}
+                                                        <span className="visually-hidden">unread notifications</span>
+                                                    </span><img src={`/assets/active_bell.png`} alt="unavailable" className="img-fluid" width="30px" /></>
+                                                }
+                                            </button>
+                                            <ul className="dropdown-menu dropdown-menu-dark">
+                                                {userNotifications.length == 0
+                                                    ? <li className="dropdown-item">No unread notifications</li>
+                                                    : <>{userNotifications.map((noti: any, i: number) => {
+                                                        return (
+                                                            <li key={noti.id} className="dropdown-item me-4">{noti.message}<img src={`/assets/cross.png`} alt="unavailable" className="img-fluid" width="30px" onClick={() => !isAdmin ? markAsRead({ notification: noti.id }) : markAsReadAdmin({ notification: noti.id })} /> </li>
+                                                        )
+                                                    })}
+                                                    </>
+                                                }
+                                            </ul>
+                                        </div>
+                                        : <></>}
                                     <Link to="/profile"><img src={user.img} alt="pfp" className="img-fluid" width="44" /></Link>
                                     <Link className="nav-item nav-link btn btn-link" to="/profile">{user.username}</Link>
                                     <button className="nav-item nav-link btn btn-link" onClick={logout}>Logout</button>
