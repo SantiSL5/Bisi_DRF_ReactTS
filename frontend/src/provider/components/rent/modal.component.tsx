@@ -1,7 +1,29 @@
+import { useState } from "react";
 import { Link, useNavigate, } from "react-router-dom";
+import { ErrorMessage } from "@hookform/error-message";
+import { useForm } from 'react-hook-form';
 
-const RentModal = ({ user, rentInfo, selectedSlot, rentBike, returnBike }: any) => {
+interface IFormInputs {
+    message: string,
+}
+
+const RentModal = ({ user, rentInfo, selectedSlot, rentBike, returnBike, incidence, createIncidence }: any) => {
     const navigate = useNavigate();
+    const [view, setView]: any = useState("info");
+
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        setValue
+    } = useForm<IFormInputs>({
+        criteriaMode: "all"
+    });
+
+    const onSubmit = (data: IFormInputs) => {
+        createIncidence({ message: data.message, slot: selectedSlot.id });
+        setView("info")
+    };
 
     return (
         <div className="container mt-3">
@@ -14,15 +36,65 @@ const RentModal = ({ user, rentInfo, selectedSlot, rentBike, returnBike }: any) 
                         </div>
                         <div className="modal-body">
                             {
-                                rentInfo ?
-                                    selectedSlot.disabled
-                                        ? <>Slot disabled because: </>
+                                view === "info"
+                                    ? selectedSlot
+                                        ? incidence
+                                            ? incidence.length > 0
+                                                ? selectedSlot.disabled || selectedSlot.warning
+                                                    ? <>{selectedSlot.disabled ? <>Slot disabled because:</> : <>Slot with unresolved incidences, check them out before riding:</>}
+                                                        <ul>
+                                                            {incidence.map((incidence: any, i: number) => {
+                                                                return (
+                                                                    <li key={incidence.id}>{incidence.message}</li>
+                                                                )
+                                                            })}
+                                                        </ul></>
+                                                    : <></>
+                                                : selectedSlot.bike
+                                                    ? <>Bike without incidences and ready to be rented.</>
+                                                    : <>Empty slot without incidences</>
+                                            : <></>
                                         : <></>
-                                    :
-                                    <>Loading...</>
+                                    : <form onSubmit={handleSubmit(onSubmit)}>
+                                        <div className="mb-2">
+                                            <label htmlFor="message" className="form-label">Message:
+                                                <textarea id="message" className="form-control mt-2"
+                                                    {...register("message", {
+                                                        required: "This input is required.",
+                                                        minLength: {
+                                                            value: 10,
+                                                            message: "At least 10 characters."
+                                                        }
+                                                    })}
+                                                />
+                                                <ErrorMessage
+                                                    errors={errors}
+                                                    name="message"
+                                                    render={({ messages }) => {
+                                                        return messages
+                                                            ? Object.entries(messages).map(([type, message]) => (
+                                                                <p key={type}>{message}</p>
+                                                            ))
+                                                            : null;
+                                                    }}
+                                                />
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <button type="submit" className="btn btn-info">Create incidence</button>
+                                        </div>
+                                    </form>
+
                             }
                         </div>
                         <div className="modal-footer">
+                            {
+                                user
+                                    ? view === "info"
+                                        ? <button className="btn btn-warning" onClick={() => setView("form")}>Create Incidence</button>
+                                        : <button className="btn btn-info" onClick={() => setView("info")}>View Info</button>
+                                    : <></>
+                            }
                             {
                                 selectedSlot
                                     ? selectedSlot.disabled

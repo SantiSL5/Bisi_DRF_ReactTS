@@ -22,6 +22,16 @@ export function useIncidences() {
         })
     })
 
+    const createIncidenceUser = ((data: any) => {
+        consume(queryConsumer.apiIncidence, incidenceQueries.createIncidenceUser, data).then((res: any) => {
+            const aux = [...incidence, res.data]
+            toast.success("Created successfully", { theme: "dark" })
+            setIncidence(aux)
+        }).catch((e: any) => {
+            toast.error(e.response.data.number[0].charAt(0).toUpperCase() + e.response.data.number[0].slice(1), { theme: "dark" })
+        })
+    })
+
     const createIncidence = ((data: any) => {
         consume(queryConsumer.apiIncidence, incidenceQueries.createIncidence, data).then((res: any) => {
             const aux = [...incidences, res.data]
@@ -69,6 +79,6 @@ export function useIncidences() {
         })
     })
 
-    return { incidences, incidence, getIncidenceById, createIncidence, deleteIncidence, deleteManyIncidences, updateIncidence };
+    return { incidences, incidence, getIncidenceById, createIncidence, createIncidenceUser, deleteIncidence, deleteManyIncidences, updateIncidence };
 
 }

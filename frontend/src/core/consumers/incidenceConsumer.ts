@@ -15,6 +15,13 @@ const incidenceConsumer: any = {
             url: secret.DJANGO_APP_URL + "/incidence/slot/" + data,
         })
     },
+    createOneByUser: (data: any) => {
+        return Api({
+            method: "post",
+            url: secret.DJANGO_APP_URL + "/incidence/user/",
+            data: data
+        })
+    },
     createOne: (data: any) => {
         return Api({
             method: "post",

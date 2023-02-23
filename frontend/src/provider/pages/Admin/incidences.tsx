@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ListIncidences from "../../components/admin/crudIncidences/list.component";
-import CreateIncidence from "../../components/admin/crudIncidences/create.component"; 
+import CreateIncidence from "../../components/admin/crudIncidences/create.component";
 import MenuAdmin from "../../components/admin/menuAdmin/menuAdmin.component";
 import Spinner from "../../components/spinner/spinner.component";
 import { useIncidences } from "../../hooks/useIncidences";
@@ -24,8 +24,8 @@ const AdminIncidences = () => {
     return (
         <div className="adminView">
             <MenuAdmin />
-            <CreateIncidence createIncidence={createIncidence} operation={op} updateData={updateData} updateIncidence={updateIncidence} changeForm={changeForm}/>
-            {incidences ? <ListIncidences list={incidences  } deleteIncidence={deleteIncidence} deleteManyIncidences={deleteManyIncidences} changeForm={changeForm} updateIncidence={updateIncidence}></ListIncidences> : <Spinner />}
+            <CreateIncidence createIncidence={createIncidence} operation={op} updateData={updateData} updateIncidence={updateIncidence} changeForm={changeForm} />
+            {incidences ? <ListIncidences list={incidences} deleteIncidence={deleteIncidence} deleteManyIncidences={deleteManyIncidences} changeForm={changeForm} updateIncidence={updateIncidence}></ListIncidences> : <Spinner />}
         </div>
     );
 }
